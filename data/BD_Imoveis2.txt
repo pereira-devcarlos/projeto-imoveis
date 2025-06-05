@@ -8,6 +8,7 @@ apartamento venda Avenida_João_Pinheiro Centro Alfenas 110 480000 1100 3 1 2 2 
 terreno aluguel Estrada_para_Serrania Zona_Rural Alfenas 5000 500 80 0 0 0 0 não não não não terra novo não não não não
 sala_comercial venda Praça_Getúlio_Vargas Centro Alfenas 60 250000 350 0 0 1 0 não sim não não cerâmica usado não sim não não
 galpão aluguel Rua_da_Saudade Distrito_Industrial Alfenas 800 4000 1800 0 0 1 3 sim sim não sim cimento reformado não não não não
+fim
 casa temporada Avenida_Beira_Lago Pontal Alfenas 150 300/dia 0 4 2 3 3 sim sim sim sim porcelanato novo sim sim sim sim
 apartamento aluguel Rua_Duque_de_Caxias Centro Alfenas 95 1600 220 3 1 2 1 sim sim sim sim laminado usado sim não não sim
 terreno venda Estrada_para_Fama Zona_Rural Alfenas 1000 90000 150 0 0 0 0 não não não não terra novo não não não não
