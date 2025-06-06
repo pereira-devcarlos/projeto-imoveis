@@ -204,7 +204,7 @@ int main(){
                 // Buscar e excluir um imóvel pela rua
                 {
                     char userEnd[30] = {0};
-                    cout << "Buscar e excluir imovel\nDigite o nome da rua: ";
+                    cout << "\nBuscar e excluir imovel pela rua \nDigite o nome da rua: ";
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
@@ -217,7 +217,7 @@ int main(){
                     // Converte o char[] para string para facilitar a comparação
                     string nomeRua(userEnd);
                     
-                    bool removido = false;
+                    int removido = 0;
                     // Percorre todos os imóveis cadastrados
                     for (i = 0; i < quantidade; i++) {
                         // Se encontrar o endereço igual ao digitado pelo usuário
@@ -226,14 +226,14 @@ int main(){
                             for (int j = i; j < quantidade - 1; j++) {
                                 imoveis[j] = imoveis[j+1];
                             }
-                            quantidade--;    // Diminui a quantidade total de imóveis
-                            removido = true; // Marca que removeu pelo menos um imóvel
-                            i--;             // Decrementa i para não pular o próximo imóvel
+                            quantidade--;   // Diminui a quantidade total de imóveis
+                            removido++;     // Marca que removeu pelo menos um imóvel
+                            i--;            // Decrementa i para não pular o próximo imóvel
                         }
                     }
 
                     // Se removeu algum imóvel, salva o novo vetor no arquivo
-                    if (removido) {
+                    if (removido >= 1) {
                         salvarImoveisNoArquivo(imoveis, quantidade);
                         cout << "\nImovel removido com sucesso!" << endl;
                     } else {
