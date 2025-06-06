@@ -29,12 +29,40 @@ struct Imovel{
     string ventilador;     // sim ou nao
 };
 
+void exibirImovel(const Imovel& imovel, int indice) {
+    cout << "Imovel " << indice + 1 << ":" << endl;
+    cout << "Tipo: " << imovel.tipo << endl;
+    cout << "Finalidade: " << imovel.finalidade << endl;
+    cout << "Endereco: " << imovel.endereco << endl;
+    cout << "Bairro: " << imovel.bairro << endl;
+    cout << "Cidade: " << imovel.cidade << endl;
+    cout << "Area: " << imovel.area << " m2" << endl;
+    cout << "Valor: R$ " << imovel.valor << endl;
+    cout << "IPTU: " << imovel.iptu << endl;
+    cout << "Quartos: " << imovel.quartos << endl;
+    cout << "Suites: " << imovel.suites << endl;
+    cout << "Banheiros: " << imovel.banheiros << endl;
+    cout << "Vagas: " << imovel.vagas << endl;
+    cout << "Cozinha: " << imovel.cozinha << endl;
+    cout << "Sala: " << imovel.sala << endl;
+    cout << "Varanda: " << imovel.varanda << endl;
+    cout << "Area de Servico: " << imovel.areaServico << endl;
+    cout << "Piso: " << imovel.piso << endl;
+    cout << "Conservacao: " << imovel.conservacao << endl;
+    cout << "Armarios: " << imovel.armarios << endl;
+    cout << "Ar Condicionado: " << imovel.arCondicionado << endl;
+    cout << "Aquecedor: " << imovel.aquecedor << endl;
+    cout << "Ventilador: " << imovel.ventilador << endl;
+    cout << endl;
+}
+
 int main(){
     int i;
     const int MAX = 200; // Definindo o tamanho maximo do array de imoveis
     int quantidade = 0; // Variavel para armazenar a quantidade de imoveis lidos
 
     ifstream info("../../data/BD_Imoveis2.txt");
+    ofstream saida("../../data/BD_Imoveis_Saida.txt");
     if(!info.is_open()){
         cout << "Erro ao abrir o arquivo" << endl;
         return 1;
@@ -72,33 +100,11 @@ int main(){
         info >> imoveis[i].tipo;
         quantidade++;
     }
-    info.close();
+    info.close(); // Fechar o arquivo
 
+    // Exibir os imoveis lidos
     for (i = 0; i < quantidade; i++){
-        cout << "Imovel " << i + 1 << ":" << endl;
-        cout << "Tipo: " << imoveis[i].tipo << endl;
-        cout << "Finalidade: " << imoveis[i].finalidade << endl;
-        cout << "Endereco: " << imoveis[i].endereco << endl;
-        cout << "Bairro: " << imoveis[i].bairro << endl;
-        cout << "Cidade: " << imoveis[i].cidade << endl;
-        cout << "Area: " << imoveis[i].area << " m2" << endl;
-        cout << "Valor: R$ " << imoveis[i].valor << endl;
-        cout << "IPTU: " << imoveis[i].iptu << endl;
-        cout << "Quartos: " << imoveis[i].quartos << endl;
-        cout << "Suites: " << imoveis[i].suites << endl;
-        cout << "Banheiros: " << imoveis[i].banheiros << endl;
-        cout << "Vagas: " << imoveis[i].vagas << endl;
-        cout << "Cozinha: " << imoveis[i].cozinha << endl;
-        cout << "Sala: " << imoveis[i].sala << endl;
-        cout << "Varanda: " << imoveis[i].varanda << endl;
-        cout << "Area de Servico: " << imoveis[i].areaServico << endl;
-        cout << "Piso: " << imoveis[i].piso << endl;
-        cout << "Conservacao: " << imoveis[i].conservacao << endl;
-        cout << "Armarios: " << imoveis[i].armarios << endl;
-        cout << "Ar Condicionado: " << imoveis[i].arCondicionado << endl;
-        cout << "Aquecedor: " << imoveis[i].aquecedor << endl;
-        cout << "Ventilador: " << imoveis[i].ventilador << endl;
-        cout << endl;
+        exibirImovel(imoveis[i], i);
     }
 
     return 0;
