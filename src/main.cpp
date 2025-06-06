@@ -29,7 +29,7 @@ struct Imovel{
     string ventilador;     // sim ou nao
 };
 
-// Função para ler os imóveis
+// Funcao para ler os imoveis
 void lerImovel(Imovel& imovel, ifstream& info) {
     // imovel.tipo deve ser lido primeiro no while para verificar se possui o valor "fim"
     info >> imovel.finalidade;
@@ -55,7 +55,103 @@ void lerImovel(Imovel& imovel, ifstream& info) {
     info >> imovel.ventilador;
 }
 
-// Função para exibir os imóveis
+// Funcao para exibir o menu
+void exibirMenu(int& opcao) {
+    cout << "========== MENU DE IMOVEIS ==========" << endl;
+    cout << "[1] Incluir novo imovel" << endl;
+    cout << "[2] Buscar e excluir por rua" << endl;
+    cout << "[3] Buscar por faixa de valor" << endl;
+    cout << "[4] Buscar por caracteristicas" << endl;
+    cout << "[5] Buscar por quartos e suites" << endl;
+    cout << "[6] Relatorio estatistico" << endl;
+    cout << "[7] Listar todos os imoveis" << endl;
+    cout << "[0] Sair" << endl;
+    cout << "======================================" << endl;
+    cout << "Escolha uma opcao: ";
+    cin >> opcao;
+}
+
+// Funcao para incluir um novo imovel no vetor
+void incluirImovel(Imovel& imovel) {
+    cout << "Digite o tipo do imovel: ";
+    cin >> imovel.tipo;
+    cout << "Digite a finalidade do imovel: ";
+    cin >> imovel.finalidade;
+    cout << "Digite o endereco do imovel: ";
+    cin >> imovel.endereco;
+    cout << "Digite o bairro do imovel: ";
+    cin >> imovel.bairro;
+    cout << "Digite a cidade do imovel: ";
+    cin >> imovel.cidade;
+    cout << "Digite a area do imovel (em m2): ";
+    cin >> imovel.area;
+    cout << "Digite o valor do imovel: ";
+    cin >> imovel.valor;
+    cout << "Digite o IPTU do imovel: ";
+    cin >> imovel.iptu;
+    cout << "Digite o numero de quartos: ";
+    cin >> imovel.quartos;
+    cout << "Digite o numero de suites: ";
+    cin >> imovel.suites;
+    cout << "Digite o numero de banheiros: ";
+    cin >> imovel.banheiros;
+    cout << "Digite o numero de vagas: ";
+    cin >> imovel.vagas;
+    cout << "Possui cozinha? (sim/nao): ";
+    cin >> imovel.cozinha;
+    cout << "Possui sala? (sim/nao): ";
+    cin >> imovel.sala;
+    cout << "Possui varanda? (sim/nao): ";
+    cin >> imovel.varanda;
+    cout << "Possui area de servico? (sim/nao): ";
+    cin >> imovel.areaServico;
+    cout << "Digite o tipo de piso: ";
+    cin >> imovel.piso;
+    cout << "Digite a conservacao do imovel: ";
+    cin >> imovel.conservacao;
+    cout << "Possui armarios? (sim/nao): ";
+    cin >> imovel.armarios;
+    cout << "Possui ar condicionado? (sim/nao): ";
+    cin >> imovel.arCondicionado;
+    cout << "Possui aquecedor? (sim/nao): ";
+    cin >> imovel.aquecedor;
+    cout << "Possui ventilador? (sim/nao): ";
+    cin >> imovel.ventilador;
+}
+
+// Função para salvar os novos imóveis no arquivo txt
+void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade, const char* caminhoArquivo) {
+    ofstream saida(caminhoArquivo, ios::trunc); // Apaga o arquivo e reescreve tudo
+    for (int i = 0; i < quantidade; i++) {
+        saida << imoveis[i].tipo << " "
+              << imoveis[i].finalidade << " "
+              << imoveis[i].endereco << " "
+              << imoveis[i].bairro << " "
+              << imoveis[i].cidade << " "
+              << imoveis[i].area << " "
+              << imoveis[i].valor << " "
+              << imoveis[i].iptu << " "
+              << imoveis[i].quartos << " "
+              << imoveis[i].suites << " "
+              << imoveis[i].banheiros << " "
+              << imoveis[i].vagas << " "
+              << imoveis[i].cozinha << " "
+              << imoveis[i].sala << " "
+              << imoveis[i].varanda << " "
+              << imoveis[i].areaServico << " "
+              << imoveis[i].piso << " "
+              << imoveis[i].conservacao << " "
+              << imoveis[i].armarios << " "
+              << imoveis[i].arCondicionado << " "
+              << imoveis[i].aquecedor << " "
+              << imoveis[i].ventilador << endl;
+    }
+    saida << "fim" << endl;
+    saida.close();
+}
+
+
+// Funcao para exibir os imoveis
 void exibirImovel(const Imovel& imovel, int indice) {
     cout << "Imovel " << indice + 1 << ":" << endl;
     cout << "Tipo: " << imovel.tipo << endl;
@@ -83,33 +179,81 @@ void exibirImovel(const Imovel& imovel, int indice) {
     cout << endl;
 }
 
+
 int main(){
-    int i;
+    int i, opcao;
     const int MAX = 200; // Definindo o tamanho maximo do array de imoveis
     int quantidade = 0; // Variavel para armazenar a quantidade de imoveis lidos
 
+    // Ifstream e ofstream para manipular arquivos externos
     ifstream info("../../data/BD_Imoveis2.txt");
-    ofstream saida("../../data/BD_Imoveis_Saida.txt");
+    //ofstream infoSaida("../../data/BD_Imoveis2.txt"); 
+    // Verifica se o arquivo foi aberto corretamente
     if(!info.is_open()){
-        cout << "Erro ao abrir o arquivo" << endl;
+        cout << "Erro ao abrir o arquivo" << endl; 
         return 1;
     }
 
-    Imovel imoveis[MAX];
+    Imovel imoveis[MAX]; // Definindo o vetor de imoveis
+
+    // Ler os imoveis do arquivo ate encontrar imoveis.tipo == "fim" ou atingir o limite de MAX
     i = 0;
-    // Ler os imoveis do arquivo até encontrar imoveis.tipo == "fim" ou atingir o limite de MAX
     while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
         lerImovel(imoveis[i], info);
         quantidade++;
         i++;
     }
-
     info.close(); // Fechar o arquivo
 
-    // Exibir os imoveis lidos
-    for (i = 0; i < quantidade; i++){
-        exibirImovel(imoveis[i], i);
+    opcao = 1; // Inicializando a opcao com um valor para entrar no loop
+    while (opcao != 0){
+        // Exibir o menu
+        exibirMenu(opcao);
+
+        // Case para cada opcao do menu
+        switch (opcao) {
+            case 1:
+                // Incluir novo imovel
+                if (quantidade < MAX) {
+                    incluirImovel(imoveis[quantidade]);
+                    quantidade++;
+                    salvarImoveisNoArquivo(imoveis, quantidade, "../../data/BD_Imoveis2.txt");
+                    cout << "\nImovel incluido com sucesso!" << endl;
+                } else {
+                    cout << "\nLimite de imoveis atingido. Nao e possivel incluir mais." << endl;
+                }
+                break;
+            case 2:
+                // Buscar e excluir por rua
+                break;
+            case 3:
+                // Buscar por faixa de valor
+                break;
+            case 4:
+                // Buscar por caracteristicas
+                break;
+            case 5:
+                // Buscar por quartos e suites
+                break;
+            case 6:
+                // Relatorio estatistico
+                break;
+            case 7:
+                // Listar todos os imoveis
+                // Exibir os imoveis lidos
+                for (i = 0; i < quantidade; i++){
+                    exibirImovel(imoveis[i], i);
+                }
+                break;
+            case 0:
+                // Sair
+                break;
+            default:
+                cout << "\nOpcao invalida. Tente novamente." << endl;
+                break;
+        }
     }
+
 
     return 0;
 }
