@@ -1,6 +1,4 @@
 casa venda Rua_das_Flores Primavera Alfenas 120 350000 800 3 1 2 2 sim sim sim sim ceramica usado sim nao nao sim
 apartamento aluguel Avenida_Getulio_Vargas Centro Alfenas 75 1200 150 2 0 1 1 sim sim sim sim laminado reformado sim sim nao nao
-terreno venda Rua_dos_Ipes Loteamento_Portal_do_Lago Alfenas 300 180000 300 0 0 0 0 nao nao nao nao terra novo nao nao nao nao
-sala_comercial aluguel Rua_Tiradentes Centro Alfenas 45 900 120 0 0 1 0 nao sim nao nao porcelanato novo nao sim nao nao
 galpao venda Distrito_Industrial Distrito_Industrial Alfenas 1500 850000 2500 0 0 2 5 sim sim nao sim cimento usado nao nao nao nao
 fim

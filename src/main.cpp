@@ -73,55 +73,33 @@ void exibirMenu(int& opcao) {
 
 // Funcao para incluir um novo imovel no vetor
 void incluirImovel(Imovel& imovel) {
-    cout << "Digite o tipo do imovel: ";
-    cin >> imovel.tipo;
-    cout << "Digite a finalidade do imovel: ";
-    cin >> imovel.finalidade;
-    cout << "Digite o endereco do imovel: ";
-    cin >> imovel.endereco;
-    cout << "Digite o bairro do imovel: ";
-    cin >> imovel.bairro;
-    cout << "Digite a cidade do imovel: ";
-    cin >> imovel.cidade;
-    cout << "Digite a area do imovel (em m2): ";
-    cin >> imovel.area;
-    cout << "Digite o valor do imovel: ";
-    cin >> imovel.valor;
-    cout << "Digite o IPTU do imovel: ";
-    cin >> imovel.iptu;
-    cout << "Digite o numero de quartos: ";
-    cin >> imovel.quartos;
-    cout << "Digite o numero de suites: ";
-    cin >> imovel.suites;
-    cout << "Digite o numero de banheiros: ";
-    cin >> imovel.banheiros;
-    cout << "Digite o numero de vagas: ";
-    cin >> imovel.vagas;
-    cout << "Possui cozinha? (sim/nao): ";
-    cin >> imovel.cozinha;
-    cout << "Possui sala? (sim/nao): ";
-    cin >> imovel.sala;
-    cout << "Possui varanda? (sim/nao): ";
-    cin >> imovel.varanda;
-    cout << "Possui area de servico? (sim/nao): ";
-    cin >> imovel.areaServico;
-    cout << "Digite o tipo de piso: ";
-    cin >> imovel.piso;
-    cout << "Digite a conservacao do imovel: ";
-    cin >> imovel.conservacao;
-    cout << "Possui armarios? (sim/nao): ";
-    cin >> imovel.armarios;
-    cout << "Possui ar condicionado? (sim/nao): ";
-    cin >> imovel.arCondicionado;
-    cout << "Possui aquecedor? (sim/nao): ";
-    cin >> imovel.aquecedor;
-    cout << "Possui ventilador? (sim/nao): ";
-    cin >> imovel.ventilador;
+    cout << "Digite o tipo do imovel: ";            cin >> imovel.tipo;
+    cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
+    cout << "Digite o endereco do imovel: ";        cin >> imovel.endereco;
+    cout << "Digite o bairro do imovel: ";          cin >> imovel.bairro;
+    cout << "Digite a cidade do imovel: ";          cin >> imovel.cidade;
+    cout << "Digite a area do imovel (em m2): ";    cin >> imovel.area;
+    cout << "Digite o valor do imovel: ";           cin >> imovel.valor;
+    cout << "Digite o IPTU do imovel: ";            cin >> imovel.iptu;
+    cout << "Digite o numero de quartos: ";         cin >> imovel.quartos;
+    cout << "Digite o numero de suites: ";          cin >> imovel.suites;
+    cout << "Digite o numero de banheiros: ";       cin >> imovel.banheiros;
+    cout << "Digite o numero de vagas: ";           cin >> imovel.vagas;
+    cout << "Possui cozinha? (sim/nao): ";          cin >> imovel.cozinha;
+    cout << "Possui sala? (sim/nao): ";             cin >> imovel.sala;
+    cout << "Possui varanda? (sim/nao): ";          cin >> imovel.varanda;
+    cout << "Possui area de servico? (sim/nao): ";  cin >> imovel.areaServico;
+    cout << "Digite o tipo de piso: ";              cin >> imovel.piso;
+    cout << "Digite a conservacao do imovel: ";     cin >> imovel.conservacao;
+    cout << "Possui armarios? (sim/nao): ";         cin >> imovel.armarios;
+    cout << "Possui ar condicionado? (sim/nao): ";  cin >> imovel.arCondicionado;
+    cout << "Possui aquecedor? (sim/nao): ";        cin >> imovel.aquecedor;
+    cout << "Possui ventilador? (sim/nao): ";       cin >> imovel.ventilador;
 }
 
 // Função para salvar os novos imóveis no arquivo txt
 void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade, const char* caminhoArquivo) {
-    ofstream saida(caminhoArquivo, ios::trunc); // Apaga o arquivo e reescreve tudo
+    ofstream saida(caminhoArquivo); // Apaga o arquivo e reescreve tudo com o imóvel já adicionado
     for (int i = 0; i < quantidade; i++) {
         saida << imoveis[i].tipo << " "
               << imoveis[i].finalidade << " "
@@ -149,7 +127,6 @@ void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade, const char* caminh
     saida << "fim" << endl;
     saida.close();
 }
-
 
 // Funcao para exibir os imoveis
 void exibirImovel(const Imovel& imovel, int indice) {
@@ -181,13 +158,13 @@ void exibirImovel(const Imovel& imovel, int indice) {
 
 
 int main(){
-    int i, opcao;
     const int MAX = 200; // Definindo o tamanho maximo do array de imoveis
     int quantidade = 0; // Variavel para armazenar a quantidade de imoveis lidos
+    
+    int i, opcao;
 
     // Ifstream e ofstream para manipular arquivos externos
     ifstream info("../../data/BD_Imoveis2.txt");
-    //ofstream infoSaida("../../data/BD_Imoveis2.txt"); 
     // Verifica se o arquivo foi aberto corretamente
     if(!info.is_open()){
         cout << "Erro ao abrir o arquivo" << endl; 
@@ -224,7 +201,45 @@ int main(){
                 }
                 break;
             case 2:
-                // Buscar e excluir por rua
+                // Buscar e excluir um imóvel pela rua
+                {
+                    char userEnd[30] = {0};
+                    cout << "Buscar e excluir imovel\nDigite o nome da rua: ";
+                    cin.ignore();
+                    cin.getline(userEnd, 30);
+
+                    // Troca espaços por underline para padronizar igual ao arquivo
+                    for (int k = 0; k < 30; k++) {
+                        if (userEnd[k] == ' ')
+                            userEnd[k] = '_';
+                    }
+
+                    // Converte o char[] para string para facilitar a comparação
+                    string nomeRua(userEnd);
+                    
+                    bool removido = false;
+                    // Percorre todos os imóveis cadastrados
+                    for (i = 0; i < quantidade; i++) {
+                        // Se encontrar o endereço igual ao digitado pelo usuário
+                        if (nomeRua == imoveis[i].endereco) {
+                            // Remove o imóvel deslocando os próximos para "cima" no array
+                            for (int j = i; j < quantidade - 1; j++) {
+                                imoveis[j] = imoveis[j+1];
+                            }
+                            quantidade--;    // Diminui a quantidade total de imóveis
+                            removido = true; // Marca que removeu pelo menos um imóvel
+                            i--;             // Decrementa i para não pular o próximo imóvel
+                        }
+                    }
+
+                    // Se removeu algum imóvel, salva o novo vetor no arquivo
+                    if (removido) {
+                        salvarImoveisNoArquivo(imoveis, quantidade, "../../data/BD_Imoveis2.txt");
+                        cout << "Imovel removido com sucesso!" << endl;
+                    } else {
+                        cout << "Nenhum imovel encontrado com esse endereco." << endl;
+                    }
+                }
                 break;
             case 3:
                 // Buscar por faixa de valor
