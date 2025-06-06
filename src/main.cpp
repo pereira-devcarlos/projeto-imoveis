@@ -57,7 +57,7 @@ void lerImovel(Imovel& imovel, ifstream& info) {
 
 // Funcao para exibir o menu
 void exibirMenu(int& opcao) {
-    cout << "========== MENU DE IMOVEIS ==========" << endl;
+    cout << "\n========== MENU DE IMOVEIS ==========" << endl;
     cout << "[1] Incluir novo imovel" << endl;
     cout << "[2] Buscar e excluir por rua" << endl;
     cout << "[3] Buscar por faixa de valor" << endl;
@@ -98,8 +98,8 @@ void incluirImovel(Imovel& imovel) {
 }
 
 // Função para salvar os novos imóveis no arquivo txt
-void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade, const char* caminhoArquivo) {
-    ofstream saida(caminhoArquivo); // Apaga o arquivo e reescreve tudo com o imóvel já adicionado
+void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
+    ofstream saida("../../data/BD_Imoveis2.txt"); // Apaga o arquivo e reescreve tudo com o imóvel já adicionado
     for (int i = 0; i < quantidade; i++) {
         saida << imoveis[i].tipo << " "
               << imoveis[i].finalidade << " "
@@ -194,7 +194,7 @@ int main(){
                 if (quantidade < MAX) {
                     incluirImovel(imoveis[quantidade]);
                     quantidade++;
-                    salvarImoveisNoArquivo(imoveis, quantidade, "../../data/BD_Imoveis2.txt");
+                    salvarImoveisNoArquivo(imoveis, quantidade);
                     cout << "\nImovel incluido com sucesso!" << endl;
                 } else {
                     cout << "\nLimite de imoveis atingido. Nao e possivel incluir mais." << endl;
@@ -234,10 +234,10 @@ int main(){
 
                     // Se removeu algum imóvel, salva o novo vetor no arquivo
                     if (removido) {
-                        salvarImoveisNoArquivo(imoveis, quantidade, "../../data/BD_Imoveis2.txt");
-                        cout << "Imovel removido com sucesso!" << endl;
+                        salvarImoveisNoArquivo(imoveis, quantidade);
+                        cout << "\nImovel removido com sucesso!" << endl;
                     } else {
-                        cout << "Nenhum imovel encontrado com esse endereco." << endl;
+                        cout << "\nNenhum imovel encontrado com esse endereco." << endl;
                     }
                 }
                 break;
