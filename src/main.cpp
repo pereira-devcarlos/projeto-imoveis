@@ -243,6 +243,12 @@ int main(){
                 break;
             case 3:
                 // Buscar por faixa de valor
+                int userFaixa[3];
+                cout << "Buscar imovel por faixa de valor:\nDigite a faixa de valor: ";
+                cin >> userFaixa[0];
+                userFaixa[1] = userFaixa[0] + 1000; // Definindo o intervalo para a busca
+                userFaixa[2] = userFaixa[0] - 1000; // Defenindo o intervalo para a busca
+
                 break;
             case 4:
                 // Buscar por caracteristicas
