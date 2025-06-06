@@ -29,6 +29,33 @@ struct Imovel{
     string ventilador;     // sim ou nao
 };
 
+// Função para ler os imóveis
+void lerImovel(Imovel& imovel, ifstream& info) {
+    // imovel.tipo deve ser lido primeiro no while para verificar se possui o valor "fim"
+    info >> imovel.finalidade;
+    info >> imovel.endereco;
+    info >> imovel.bairro;
+    info >> imovel.cidade;
+    info >> imovel.area;
+    info >> imovel.valor;
+    info >> imovel.iptu;
+    info >> imovel.quartos;
+    info >> imovel.suites;
+    info >> imovel.banheiros;
+    info >> imovel.vagas;
+    info >> imovel.cozinha;
+    info >> imovel.sala;
+    info >> imovel.varanda;
+    info >> imovel.areaServico;
+    info >> imovel.piso;
+    info >> imovel.conservacao;
+    info >> imovel.armarios;
+    info >> imovel.arCondicionado;
+    info >> imovel.aquecedor;
+    info >> imovel.ventilador;
+}
+
+// Função para exibir os imóveis
 void exibirImovel(const Imovel& imovel, int indice) {
     cout << "Imovel " << indice + 1 << ":" << endl;
     cout << "Tipo: " << imovel.tipo << endl;
@@ -70,36 +97,13 @@ int main(){
 
     Imovel imoveis[MAX];
     i = 0;
-
-    // Ler os imoveis do arquivo
-    info >> imoveis[i].tipo;
-    while (imoveis[i].tipo != "fim"){
-        info >> imoveis[i].finalidade;
-        info >> imoveis[i].endereco;
-        info >> imoveis[i].bairro;
-        info >> imoveis[i].cidade;
-        info >> imoveis[i].area;
-        info >> imoveis[i].valor;
-        info >> imoveis[i].iptu;
-        info >> imoveis[i].quartos;
-        info >> imoveis[i].suites;
-        info >> imoveis[i].banheiros;
-        info >> imoveis[i].vagas;
-        info >> imoveis[i].cozinha;
-        info >> imoveis[i].sala;
-        info >> imoveis[i].varanda;
-        info >> imoveis[i].areaServico;
-        info >> imoveis[i].piso;
-        info >> imoveis[i].conservacao;
-        info >> imoveis[i].armarios;
-        info >> imoveis[i].arCondicionado;
-        info >> imoveis[i].aquecedor;
-        info >> imoveis[i].ventilador;
-        i++;
-
-        info >> imoveis[i].tipo;
+    // Ler os imoveis do arquivo até encontrar imoveis.tipo == "fim" ou atingir o limite de MAX
+    while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
+        lerImovel(imoveis[i], info);
         quantidade++;
+        i++;
     }
+
     info.close(); // Fechar o arquivo
 
     // Exibir os imoveis lidos
