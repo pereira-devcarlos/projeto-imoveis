@@ -72,8 +72,9 @@ void exibirMenu(int& opcao) {
 void incluirImovel(Imovel& imovel) {
     cout << "Digite o tipo do imovel: ";            cin >> imovel.tipo;
     cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
-    
-    cout << "Digite o endereco do imovel: ";        cin >> imovel.endereco;
+
+    cout << "Digite o endereco do imovel: ";
+    getline(cin, imovel.endereco); //Getline para poder colocar rua com espaços
     // Troca espacos por underline no endereco
     for (int i = 0; i < imovel.endereco.size(); i++) {
         if (imovel.endereco[i] == ' ')
