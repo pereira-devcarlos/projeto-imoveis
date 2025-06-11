@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cctype> // No topo do arquivo
 
 using namespace std;
 
@@ -74,29 +75,20 @@ void incluirImovel(Imovel& imovel) {
     cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
 
     cout << "Digite o endereco do imovel: ";
-    cin.ignore(); // Limpa o buffer se usou cin >> antes
+    cin.ignore();
     getline(cin, imovel.endereco);
-    // Troca espacos por underline no endereco
-    for (size_t i = 0; i < imovel.endereco.size(); i++) { // Uso do tipo size_t para o método .size()
-        if (imovel.endereco[i] == ' ')
-            imovel.endereco[i] = '_';
-    }
+    for (size_t i = 0; i < imovel.endereco.size(); i++)
+        if (imovel.endereco[i] == ' ') imovel.endereco[i] = '_';
 
     cout << "Digite o bairro do imovel: ";
     getline(cin, imovel.bairro);
-    // Troca espacos por underline em bairro
-    for (size_t i = 0; i < imovel.bairro.size(); i++) {
-        if (imovel.bairro[i] == ' ')
-            imovel.bairro[i] = '_';
-    }
+    for (size_t i = 0; i < imovel.bairro.size(); i++)
+        if (imovel.bairro[i] == ' ') imovel.bairro[i] = '_';
 
     cout << "Digite a cidade do imovel: ";
     getline(cin, imovel.cidade);
-    // Troca espacos por underline em cidade
-    for (size_t i = 0; i < imovel.cidade.size(); i++) {
-        if (imovel.cidade[i] == ' ')
-            imovel.cidade[i] = '_';
-    }
+    for (size_t i = 0; i < imovel.cidade.size(); i++)
+        if (imovel.cidade[i] == ' ') imovel.cidade[i] = '_';
 
     cout << "Digite a area do imovel (em m2): ";    cin >> imovel.area;
     cout << "Digite o valor do imovel: ";           cin >> imovel.valor;
@@ -105,16 +97,66 @@ void incluirImovel(Imovel& imovel) {
     cout << "Digite o numero de suites: ";          cin >> imovel.suites;
     cout << "Digite o numero de banheiros: ";       cin >> imovel.banheiros;
     cout << "Digite o numero de vagas: ";           cin >> imovel.vagas;
-    cout << "Possui cozinha? (sim/nao): ";          cin >> imovel.cozinha;
-    cout << "Possui sala? (sim/nao): ";             cin >> imovel.sala;
-    cout << "Possui varanda? (sim/nao): ";          cin >> imovel.varanda;
-    cout << "Possui area de servico? (sim/nao): ";  cin >> imovel.areaServico;
-    cout << "Digite o tipo de piso: ";              cin >> imovel.piso;
-    cout << "Digite a conservacao do imovel: ";     cin >> imovel.conservacao;
-    cout << "Possui armarios? (sim/nao): ";         cin >> imovel.armarios;
-    cout << "Possui ar condicionado? (sim/nao): ";  cin >> imovel.arCondicionado;
-    cout << "Possui aquecedor? (sim/nao): ";        cin >> imovel.aquecedor;
-    cout << "Possui ventilador? (sim/nao): ";       cin >> imovel.ventilador;
+
+    int op;
+    // Cozinha
+    do {
+        cout << "Possui cozinha? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.cozinha = (op == 1) ? "sim" : "nao";
+
+    // Sala
+    do {
+        cout << "Possui sala? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.sala = (op == 1) ? "sim" : "nao";
+
+    // Varanda
+    do {
+        cout << "Possui varanda? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.varanda = (op == 1) ? "sim" : "nao";
+
+    // Area de servico
+    do {
+        cout << "Possui area de servico? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.areaServico = (op == 1) ? "sim" : "nao";
+
+    cout << "Digite o tipo de piso: ";      cin >> imovel.piso;
+    cout << "Digite a conservacao do imovel: "; cin >> imovel.conservacao;
+
+    // Armarios
+    do {
+        cout << "Possui armarios? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.armarios = (op == 1) ? "sim" : "nao";
+
+    // Ar condicionado
+    do {
+        cout << "Possui ar condicionado? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.arCondicionado = (op == 1) ? "sim" : "nao";
+
+    // Aquecedor
+    do {
+        cout << "Possui aquecedor? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.aquecedor = (op == 1) ? "sim" : "nao";
+
+    // Ventilador
+    do {
+        cout << "Possui ventilador? [1] - Sim  [2] - Nao: ";
+        cin >> op;
+    } while (op != 1 && op != 2);
+    imovel.ventilador = (op == 1) ? "sim" : "nao";
 }
 
 void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
@@ -162,7 +204,7 @@ void exibirImovel(Imovel& imovel, int indice) {
             imovel.cidade[i] = ' ';
     }    
 
-    // Exivir os imoveis com os texto formatados
+    // Exibir os imoveis com os texto formatados
     cout << "Imovel " << indice + 1 << ":" << endl;
     cout << "Tipo: " << imovel.tipo << endl;
     cout << "Finalidade: " << imovel.finalidade << endl;
