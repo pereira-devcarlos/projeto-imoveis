@@ -240,28 +240,21 @@ int main(){
                         cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]Não: ";
                         cin >> opcao;
                     } while (opcao < 1 || opcao > 2);
-
-                    int removido = 0;
-                    // Percorre todos os imoveis cadastrados
-                    for (i = 0; i < quantidade; i++) {
-                        // Se encontrar o endereco igual ao digitado pelo usuario
-                        if (nomeRua == imoveis[i].endereco) {
-                            // Remove o imovel deslocando os proximos para cima no array
-                            for (int j = i; j < quantidade - 1; j++) {
-                                imoveis[j] = imoveis[j+1];
+                    if(opcao == 1){
+                        // Percorre todos os imoveis cadastrados
+                        for (i = 0; i < quantidade; i++) {
+                            // Se encontrar o endereco igual ao digitado pelo usuario
+                            if (nomeRua == imoveis[i].endereco) {
+                                // Remove o imovel deslocando os proximos para cima no array
+                                for (int j = i; j < quantidade - 1; j++) {
+                                    imoveis[j] = imoveis[j+1];
+                                }
+                                quantidade--;
+                                i--;
                             }
-                            quantidade--;
-                            removido++;
-                            i--;
                         }
-                    }
-
-                    // Se removeu algum imovel, salva o novo vetor no arquivo
-                    if (removido >= 1) {
                         salvarImoveisNoArquivo(imoveis, quantidade);
                         cout << "\nImovel removido com sucesso!" << endl;
-                    } else {
-                        cout << "\nNenhum imovel encontrado com esse endereco." << endl;
                     }
                 }
                 break;
