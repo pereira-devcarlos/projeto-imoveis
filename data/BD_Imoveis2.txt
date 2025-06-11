@@ -1,8 +1,16 @@
-apartamento aluguel Avenida Getulio Vargas Centro Alfenas 75 1200 150 2 0 1 1 sim sim sim sim laminado reformado sim sim nao nao
-galpao venda Distrito Industrial Distrito Industrial Alfenas 1500 850000 2500 0 0 2 5 sim sim nao sim cimento usado nao nao nao nao
-casa venda Rua Jasmins Vila Promessa Alfenas 80 210000 200 4 1 2 5 sim sim nao sim ceramica novo sim nao sim sim
-casa temporada Rua Alameda das Perobas Jardim Primavera Alfenas 75 5000 80 4 0 2 5 sim sim sim sim ceramica novo sim sim nao sim
-casa aluguel Rua Joaquim Vila Esperanca Alfenas 80 800 100 4 0 2 4 sim sim nao sim cimento novo sim sim nao nao
-terreno venda Rua Benjamim Vista Grande Alfenas 85 300500 230 5 1 2 6 sim sim sim sim porcelanato reformado sim sim sim nao
-apartamento aluguel Rua_das_Orquideas Vila_Promessa Alfenas 70 1100 80 4 1 1 5 sim sim sim sim ceramica novo sim sim sim nao
+casa venda Rua_das_Flores Primavera Alfenas 120 350000 800 3 1 2 2 sim sim sim sim cerâmica usado sim não não sim
+apartamento aluguel Avenida_Getúlio_Vargas Centro Alfenas 75 1200 150 2 0 1 1 sim sim sim sim laminado reformado sim sim não não
+terreno venda Rua_dos_Ipês Loteamento_Portal_do_Lago Alfenas 300 180000 300 0 0 0 0 não não não não terra novo não não não não
+sala_comercial aluguel Rua_Tiradentes Centro Alfenas 45 900 120 0 0 1 0 não sim não não porcelanato novo não sim não não
+galpão venda Distrito_Industrial Distrito_Industrial Alfenas 1500 850000 2500 0 0 2 5 sim sim não sim cimento usado não não não não
+casa aluguel Rua_das_Acácias Jardim_das_Oliveiras Alfenas 90 1500 200 2 1 2 1 sim sim sim sim cerâmica reformado sim não sim sim
+apartamento venda Avenida_João_Pinheiro Centro Alfenas 110 480000 1100 3 1 2 2 sim sim sim sim porcelanato novo sim sim não não
+terreno aluguel Estrada_para_Serrania Zona_Rural Alfenas 5000 500 80 0 0 0 0 não não não não terra novo não não não não
+sala_comercial venda Praça_Getúlio_Vargas Centro Alfenas 60 250000 350 0 0 1 0 não sim não não cerâmica usado não sim não não
+casa temporada Avenida_Beira_Lago Pontal Alfenas 150 300/dia 0 4 2 3 3 sim sim sim sim porcelanato novo sim sim sim sim
+apartamento aluguel Rua_Duque_de_Caxias Centro Alfenas 95 1600 220 3 1 2 1 sim sim sim sim laminado usado sim não não sim
+terreno venda Estrada_para_Fama Zona_Rural Alfenas 1000 90000 150 0 0 0 0 não não não não terra novo não não não não
+sala_comercial aluguel Rua_Coronel_José_Bento Centro Alfenas 30 700 100 0 0 1 0 não sim não não cerâmica reformado não sim não não
+galpão venda Avenida_Marginal Distrito_Industrial Alfenas 2000 1200000 3000 0 0 3 8 sim sim não sim cimento novo não não não não
+casa venda Rua_dos_Lírios Campos_Elíseos Alfenas 180 520000 1200 4 2 3 3 sim sim sim sim porcelanato reformado sim sim não sim
 fim

@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <cctype> // No topo do arquivo
+#include <sstream> // Adicione no topo do arquivo
 
 using namespace std;
 
@@ -12,7 +13,7 @@ struct Imovel{
     string bairro;
     string cidade;
     int area;
-    int valor;
+    string valor; // Troque de int para string
     string iptu;
     int quartos;
     int suites;
@@ -36,7 +37,7 @@ void lerImovel(Imovel& imovel, ifstream& info) {
     info >> imovel.bairro;
     info >> imovel.cidade;
     info >> imovel.area;
-    info >> imovel.valor;
+    info >> imovel.valor; // Agora lê como string
     info >> imovel.iptu;
     info >> imovel.quartos;
     info >> imovel.suites;
@@ -253,28 +254,25 @@ void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
     saida.close();
 }
 
-void exibirImovel(Imovel& imovel, int indice) {
-    // Troca underline por espaco no endereco, bairro e cidade
-    for (size_t i = 0; i < imovel.endereco.size(); i++) { // Uso do tipo size_t para o m�todo .size()
-        if (imovel.endereco[i] == '_')
-            imovel.endereco[i] = ' ';
-    }
-    for (size_t i = 0; i < imovel.bairro.size(); i++) {
-        if (imovel.bairro[i] == '_')
-            imovel.bairro[i] = ' ';
-    }
-    for (size_t i = 0; i < imovel.cidade.size(); i++) {
-        if (imovel.cidade[i] == '_')
-            imovel.cidade[i] = ' ';
-    }    
+void exibirImovel(const Imovel& imovel, int indice) {
+    // Cria cópias locais para exibir sem alterar o original
+    string endereco = imovel.endereco;
+    string bairro = imovel.bairro;
+    string cidade = imovel.cidade;
 
-    // Exibir os imoveis com os texto formatados
+    for (size_t i = 0; i < endereco.size(); i++)
+        if (endereco[i] == '_') endereco[i] = ' ';
+    for (size_t i = 0; i < bairro.size(); i++)
+        if (bairro[i] == '_') bairro[i] = ' ';
+    for (size_t i = 0; i < cidade.size(); i++)
+        if (cidade[i] == '_') cidade[i] = ' ';
+
     cout << "Imovel " << indice + 1 << ":" << endl;
     cout << "Tipo: " << imovel.tipo << endl;
     cout << "Finalidade: " << imovel.finalidade << endl;
-    cout << "Endereco: " << imovel.endereco << endl;
-    cout << "Bairro: " << imovel.bairro << endl;
-    cout << "Cidade: " << imovel.cidade << endl;
+    cout << "Endereco: " << endereco << endl;
+    cout << "Bairro: " << bairro << endl;
+    cout << "Cidade: " << cidade << endl;
     cout << "Area: " << imovel.area << " m2" << endl;
     cout << "Valor: R$ " << imovel.valor << endl;
     cout << "IPTU: " << imovel.iptu << endl;
@@ -351,39 +349,46 @@ int main(){
                     string nomeRua(userEnd); // Converte para string para facilitar compara��o
 
                     // Exibe todos os im�veis encontrados com o endere�o informado
+                    j=0;
                     for (i = 0; i < quantidade; i++){
                         if(nomeRua == imoveis[i].endereco){
                             exibirImovel(imoveis[i], i);
+                            j++;
                         }
                     }
-                    // Pergunta se deseja excluir o im�vel encontrado
-                    do{
-                        if(opcao < 1 || opcao > 2){
-                            cout << "Op�ao inv�lida!!" << endl;
-                        }
-                        cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]N�o: ";
-                        cin >> opcao;
-                    } while (opcao < 1 || opcao > 2);
-                    if(opcao == 1){
-                        // Remove todos os im�veis com o endere�o informado
-                        for (i = 0; i < quantidade; i++) {
-                            if (nomeRua == imoveis[i].endereco) {
-                                // Remove o im�vel deslocando os pr�ximos para esquerda no array
-                                for (j = i; j < quantidade - 1; j++) {
-                                    imoveis[j] = imoveis[j+1];
-                                }
-                                quantidade--;
-                                i--;
+                    if(j == 0){
+                        cout << "Nao possui nenhum imovel com esse endereco!" << endl;
+                    }
+                    else {
+                        // Pergunta se deseja excluir o im�vel encontrado
+                        do{
+                            if(opcao < 1 || opcao > 2){
+                                cout << "Op�ao inv�lida!!" << endl;
                             }
+                            cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]N�o: ";
+                            cin >> opcao;
+                        } while (opcao < 1 || opcao > 2);
+                        if(opcao == 1){
+                            // Remove todos os im�veis com o endere�o informado
+                            for (i = 0; i < quantidade; i++) {
+                                if (nomeRua == imoveis[i].endereco) {
+                                    // Remove o im�vel deslocando os pr�ximos para esquerda no array
+                                    for (j = i; j < quantidade - 1; j++) {
+                                        imoveis[j] = imoveis[j+1];
+                                    }
+                                    quantidade--;
+                                    i--;
+                                }
+                            }
+                            salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo ap�s exclus�o
+                            cout << "\nImovel removido com sucesso!" << endl;
                         }
-                        salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo ap�s exclus�o
-                        cout << "\nImovel removido com sucesso!" << endl;
                     }
                 }
                 break;
             case 3:
                 {
-                    // Busca de im�veis por faixa de valor para loca��o, aluguel ou temporada
+                    // Busca de imóveis por faixa de valor para locação, aluguel ou temporada
                     int userFaixa[2];
                     cout << "Buscar imovel por faixa de valor para locacao, aluguel  ou  temporada:\nDigite o 1 valor: ";
                     cin >> userFaixa[0];
@@ -391,16 +396,22 @@ int main(){
                     cin >> userFaixa[1];
                     cout << endl;
 
-                    cout << "Na faixa de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
+                    cout << "Na faixa de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:\n" << endl;
                     for (i = 0, j = 0; i < quantidade; i++){
-                        // Busca apenas im�veis com finalidade locacao, aluguel ou temporada
+                        // Busca apenas imóveis com finalidade locacao, aluguel ou temporada
                         if((imoveis[i].finalidade == "locacao" ||
                             imoveis[i].finalidade == "aluguel" ||
-                            imoveis[i].finalidade == "temporada") &&
-                           (imoveis[i].valor > userFaixa[0]) && 
-                           (imoveis[i].valor < userFaixa[1])){
-                            exibirImovel(imoveis[i], i);
-                            j++;
+                            imoveis[i].finalidade == "temporada")) {
+
+                            // Extrai apenas o valor numérico do campo valor
+                            int valorNumerico = 0;
+                            stringstream ss(imoveis[i].valor);
+                            ss >> valorNumerico; // Vai pegar só o número do início da string
+
+                            if(valorNumerico > userFaixa[0] && valorNumerico < userFaixa[1]){
+                                exibirImovel(imoveis[i], i);
+                                j++;
+                            }
                         }
                     }
                     if(j == 0){
