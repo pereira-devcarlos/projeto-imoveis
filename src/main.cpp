@@ -77,25 +77,23 @@ void incluirImovel(Imovel& imovel) {
     cin.ignore(); // Limpa o buffer se usou cin >> antes
     getline(cin, imovel.endereco);
     // Troca espacos por underline no endereco
-    for (int i = 0; i < imovel.endereco.size(); i++) {
+    for (size_t i = 0; i < imovel.endereco.size(); i++) { // Uso do tipo size_t para o método .size()
         if (imovel.endereco[i] == ' ')
             imovel.endereco[i] = '_';
     }
 
     cout << "Digite o bairro do imovel: ";
-    cin.ignore(); // Limpa o buffer se usou cin >> antes
     getline(cin, imovel.bairro);
     // Troca espacos por underline em bairro
-    for (int i = 0; i < imovel.bairro.size(); i++) {
+    for (size_t i = 0; i < imovel.bairro.size(); i++) {
         if (imovel.bairro[i] == ' ')
             imovel.bairro[i] = '_';
     }
 
     cout << "Digite a cidade do imovel: ";
-    cin.ignore(); // Limpa o buffer se usou cin >> antes
     getline(cin, imovel.cidade);
     // Troca espacos por underline em cidade
-    for (int i = 0; i < imovel.cidade.size(); i++) {
+    for (size_t i = 0; i < imovel.cidade.size(); i++) {
         if (imovel.cidade[i] == ' ')
             imovel.cidade[i] = '_';
     }
