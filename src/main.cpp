@@ -64,7 +64,7 @@ void exibirMenu(int& opcao) {
     cout << "[6] Relatorio estatistico" << endl;
     cout << "[7] Listar todos os imoveis" << endl;
     cout << "[0] Sair" << endl;
-    cout << "======================================" << endl;
+    cout << "=====================================" << endl;
     cout << "Escolha uma opcao: ";
     cin >> opcao;
     cout << endl;
@@ -448,7 +448,24 @@ int main(){
                 break;
             case 5:
                 // Busca de im�veis pelo n�mero de quartos e su�tes
-                // (implementar aqui se desejar)
+                int userQuartos, userSuites; // Define variaveis para armazenar os valores digitados pelo usu�rio
+                cout << "Buscar imovel por numero de quartos e suites:\nDigite o numero de quartos: ";
+                cin >> userQuartos;
+                cout << "Digite o numero de suites: ";
+                cin >> userSuites;
+                cout << endl;
+                cout << "Com " << userQuartos << " quartos e " << userSuites << " suites foram encontrados:\n" << endl;
+                // Exibe todos os imoveis que possuem a quantidade de quartos e suites informada
+                for (j = 0, i = 0; i < quantidade; i++) {
+                    if (imoveis[i].quartos == userQuartos && imoveis[i].suites == userSuites) {
+                        exibirImovel(imoveis[i], i);
+                        j++;
+                    }
+                }
+                // Se nenhum imovel for encontrado, exibe mensagem de aviso
+                if (j == 0) {
+                    cout << "Nenhum imovel encontrado com essa quantidade de quartos e suites." << endl;
+                }
                 break;
             case 6:
                 // Relat�rio estat�stico
