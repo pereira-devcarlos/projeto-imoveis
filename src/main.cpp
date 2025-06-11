@@ -1,8 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cctype> // No topo do arquivo
-#include <sstream> // Adicione no topo do arquivo
+#include <sstream>
 
 using namespace std;
 
