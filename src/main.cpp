@@ -74,15 +74,32 @@ void incluirImovel(Imovel& imovel) {
     cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
 
     cout << "Digite o endereco do imovel: ";
-    getline(cin, imovel.endereco); //Getline para poder colocar rua com espaços
+    cin.ignore(); // Limpa o buffer se usou cin >> antes
+    getline(cin, imovel.endereco);
     // Troca espacos por underline no endereco
     for (int i = 0; i < imovel.endereco.size(); i++) {
         if (imovel.endereco[i] == ' ')
             imovel.endereco[i] = '_';
     }
 
-    cout << "Digite o bairro do imovel: ";          cin >> imovel.bairro;
-    cout << "Digite a cidade do imovel: ";          cin >> imovel.cidade;
+    cout << "Digite o bairro do imovel: ";
+    cin.ignore(); // Limpa o buffer se usou cin >> antes
+    getline(cin, imovel.bairro);
+    // Troca espacos por underline em bairro
+    for (int i = 0; i < imovel.bairro.size(); i++) {
+        if (imovel.bairro[i] == ' ')
+            imovel.bairro[i] = '_';
+    }
+
+    cout << "Digite a cidade do imovel: ";
+    cin.ignore(); // Limpa o buffer se usou cin >> antes
+    getline(cin, imovel.cidade);
+    // Troca espacos por underline em cidade
+    for (int i = 0; i < imovel.cidade.size(); i++) {
+        if (imovel.cidade[i] == ' ')
+            imovel.cidade[i] = '_';
+    }
+
     cout << "Digite a area do imovel (em m2): ";    cin >> imovel.area;
     cout << "Digite o valor do imovel: ";           cin >> imovel.valor;
     cout << "Digite o IPTU do imovel: ";            cin >> imovel.iptu;
