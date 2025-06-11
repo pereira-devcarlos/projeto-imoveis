@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -468,8 +469,56 @@ int main(){
                 }
                 break;
             case 6:
-                // Relat�rio estat�stico
-                // (implementar aqui se desejar)
+                // relatório de estatísticas: porcentagens de imóveis por finalidade, porcentagens de casas com suítes, porcentagem de pisos com cerâmica nas salas comerciais;
+                {
+                    int venda = 0, aluguel = 0, locacao = 0, temporada = 0;
+                    int casasComSuites = 0, totalCasas = 0;
+                    int salasComCeramica = 0, totalSalasComerciais = 0;
+
+                    for (i = 0; i < quantidade; i++) {
+                        if (imoveis[i].finalidade == "venda") venda++;
+                        else if (imoveis[i].finalidade == "aluguel") aluguel++;
+                        else if (imoveis[i].finalidade == "locacao") locacao++;
+                        else if (imoveis[i].finalidade == "temporada") temporada++;
+
+                        if (imoveis[i].tipo == "casa") {
+                            totalCasas++;
+                            if (imoveis[i].suites > 0) casasComSuites++;
+                        } else if (imoveis[i].tipo == "sala_comercial") {
+                            totalSalasComerciais++;
+                            if (imoveis[i].piso == "ceramica" && imoveis[i].sala == "sim") salasComCeramica++;
+                        }
+                    }
+
+                    cout << fixed << setprecision(2); // <-- Adicione esta linha
+
+                    cout << "\nRelatorio Estatistico:\n" << endl;
+                    cout << "Porcentagem de imoveis por finalidade:" << endl;
+                    cout << "----------------------------------------" << endl;
+                    cout << "Venda: " << (venda * 100.0 / quantidade) << "%" << endl;
+                    cout << "----------------------------------------" << endl;
+                    cout << "Aluguel: " << (aluguel * 100.0 / quantidade) << "%" << endl;
+                    cout << "----------------------------------------" << endl;
+                    cout << "Locacao: " << (locacao * 100.0 / quantidade) << "%" << endl;
+                    cout << "----------------------------------------" << endl;
+                    cout << "Temporada: " << (temporada * 100.0 / quantidade) << "%" << endl;
+                    cout << "----------------------------------------" << endl;
+
+                    cout << "Porcentagem de casas com suites: ";
+                    if (totalCasas > 0)
+                        cout << (casasComSuites * 100.0 / totalCasas) << "%" << endl;
+                    else
+                        cout << "Nenhuma casa cadastrada." << endl;
+
+                    cout << "----------------------------------------" << endl;
+                    cout << "Porcentagem de salas comerciais com \npiso de ceramica e sala: ";
+                    if (totalSalasComerciais > 0)
+                        cout << (salasComCeramica * 100.0 / totalSalasComerciais) << "%" << endl;
+                    else
+                        cout << "Nenhuma sala comercial cadastrada." << endl;
+                }
+                cout << "----------------------------------------" << endl;
+                cout << "\nRelatorio estatistico concluido." << endl;
                 break;
             case 7:
                 // Lista todos os im�veis cadastrados
