@@ -1,8 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <iomanip>
+#include <iostream>   
+#include <fstream>    // Permite ler e gravar arquivos (ifstream, ofstream)
+#include <string>     // Permite usar o tipo string e suas operacoes
+#include <sstream>    // Permite usar stringstream para conversao entre string e outros tipos
+#include <iomanip>    // Permite formatar a saida (ex: setprecision para casas decimais)
 
 using namespace std;
 
