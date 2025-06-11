@@ -69,6 +69,7 @@ void exibirMenu(int& opcao) {
     cout << "======================================" << endl;
     cout << "Escolha uma opcao: ";
     cin >> opcao;
+    cout << endl;
 }
 
 // Funcao para incluir um novo imovel no vetor
@@ -97,9 +98,9 @@ void incluirImovel(Imovel& imovel) {
     cout << "Possui ventilador? (sim/nao): ";       cin >> imovel.ventilador;
 }
 
-// Função para salvar os novos imóveis no arquivo txt
+// Fun??o para salvar os novos im?veis no arquivo txt
 void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
-    ofstream saida("../../data/BD_Imoveis2.txt"); // Apaga o arquivo e reescreve tudo com o imóvel já adicionado
+    ofstream saida("../../data/BD_Imoveis2.txt"); // Apaga o arquivo e reescreve tudo com o im?vel j? adicionado
     for (int i = 0; i < quantidade; i++) {
         saida << imoveis[i].tipo << " "
               << imoveis[i].finalidade << " "
@@ -161,7 +162,7 @@ int main(){
     const int MAX = 200; // Definindo o tamanho maximo do array de imoveis
     int quantidade = 0; // Variavel para armazenar a quantidade de imoveis lidos
     
-    int i, opcao;
+    int i, j, opcao;
 
     // Ifstream e ofstream para manipular arquivos externos
     ifstream info("../../data/BD_Imoveis2.txt");
@@ -201,38 +202,38 @@ int main(){
                 }
                 break;
             case 2:
-                // Buscar e excluir um imóvel pela rua
+                // Buscar e excluir um im?vel pela rua
                 {
                     char userEnd[30] = {0};
                     cout << "\nBuscar e excluir imovel pela rua \nDigite o nome da rua: ";
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
-                    // Troca espaços por underline para padronizar igual ao arquivo
+                    // Troca espa?os por underline para padronizar igual ao arquivo
                     for (int k = 0; k < 30; k++) {
                         if (userEnd[k] == ' ')
                             userEnd[k] = '_';
                     }
 
-                    // Converte o char[] para string para facilitar a comparação
+                    // Converte o char[] para string para facilitar a compara??o
                     string nomeRua(userEnd);
                     
                     int removido = 0;
-                    // Percorre todos os imóveis cadastrados
+                    // Percorre todos os im?veis cadastrados
                     for (i = 0; i < quantidade; i++) {
-                        // Se encontrar o endereço igual ao digitado pelo usuário
+                        // Se encontrar o endere?o igual ao digitado pelo usu?rio
                         if (nomeRua == imoveis[i].endereco) {
-                            // Remove o imóvel deslocando os próximos para "cima" no array
+                            // Remove o im?vel deslocando os pr?ximos para "cima" no array
                             for (int j = i; j < quantidade - 1; j++) {
                                 imoveis[j] = imoveis[j+1];
                             }
-                            quantidade--;   // Diminui a quantidade total de imóveis
-                            removido++;     // Marca que removeu pelo menos um imóvel
-                            i--;            // Decrementa i para não pular o próximo imóvel
+                            quantidade--;   // Diminui a quantidade total de im?veis
+                            removido++;     // Marca que removeu pelo menos um im?vel
+                            i--;            // Decrementa i para n?o pular o pr?ximo im?vel
                         }
                     }
 
-                    // Se removeu algum imóvel, salva o novo vetor no arquivo
+                    // Se removeu algum im?vel, salva o novo vetor no arquivo
                     if (removido >= 1) {
                         salvarImoveisNoArquivo(imoveis, quantidade);
                         cout << "\nImovel removido com sucesso!" << endl;
@@ -243,15 +244,26 @@ int main(){
                 break;
             case 3:
                 // Buscar por faixa de valor
-                int userFaixa[3];
-                cout << "Buscar imovel por faixa de valor:\nDigite a faixa de valor: ";
+                int userFaixa[2];
+                cout << "Buscar imovel por faixa de valor:\nDigite o 1º valor: ";
                 cin >> userFaixa[0];
-                userFaixa[1] = userFaixa[0] + 1000; // Definindo o intervalo para a busca
-                userFaixa[2] = userFaixa[0] - 1000; // Defenindo o intervalo para a busca
+                cout << "Digite o 2º valor: ";
+                cin >> userFaixa[1];
+                cout << endl;
 
+                cout << "No intervalo de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
+                for (i = 0, j = 0; i < quantidade; i++){
+                    if(imoveis[i].valor > userFaixa[0] && imoveis[i].valor < userFaixa[1]){
+                        exibirImovel(imoveis[i], i);
+                        j++;
+                    }
+                }
+                if(j == 0){
+                    cout << "Não possui imovel nessa faixa de valores." << endl;
+                }
                 break;
             case 4:
-                // Buscar por caracteristicas
+                // Buscar por caracteristicas:
                 break;
             case 5:
                 // Buscar por quartos e suites
