@@ -479,27 +479,37 @@ int main(){
             case 6:
                 // Relatorio estatistico sobre os imoveis cadastrados
                 {
+                    // Variaveis para contar a quantidade de imoveis por finalidade
                     int venda = 0, aluguel = 0, locacao = 0, temporada = 0;
+                    // Variaveis para calcular porcentagem de casas com suites
                     int casasComSuites = 0, totalCasas = 0;
+                    // Variaveis para calcular porcentagem de salas comerciais com piso de ceramica e sala
                     int salasComCeramica = 0, totalSalasComerciais = 0;
 
+                    // Percorre todos os imoveis cadastrados
                     for (i = 0; i < quantidade; i++) {
+                        // Conta cada finalidade
                         if (imoveis[i].finalidade == "venda") venda++;
                         else if (imoveis[i].finalidade == "aluguel") aluguel++;
                         else if (imoveis[i].finalidade == "locacao") locacao++;
                         else if (imoveis[i].finalidade == "temporada") temporada++;
 
+                        // Conta casas e casas com suites
                         if (imoveis[i].tipo == "casa") {
                             totalCasas++;
                             if (imoveis[i].suites > 0) casasComSuites++;
-                        } else if (imoveis[i].tipo == "sala_comercial") {
+                        }
+                        // Conta salas comerciais e salas comerciais com piso ceramica e sala
+                        else if (imoveis[i].tipo == "sala_comercial") {
                             totalSalasComerciais++;
                             if (imoveis[i].piso == "ceramica" && imoveis[i].sala == "sim") salasComCeramica++;
                         }
                     }
 
+                    // Define a formatacao de casas decimais para as porcentagens
                     cout << fixed << setprecision(2);
 
+                    // Exibe o relatorio estatistico
                     cout << "\nRelatorio Estatistico:\n" << endl;
                     cout << "Porcentagem de imoveis por finalidade:" << endl;
                     cout << "----------------------------------------" << endl;
@@ -512,6 +522,7 @@ int main(){
                     cout << "Temporada: " << (temporada * 100.0 / quantidade) << "%" << endl;
                     cout << "----------------------------------------" << endl;
 
+                    // Exibe porcentagem de casas com suites
                     cout << "Porcentagem de casas com suites: ";
                     if (totalCasas > 0)
                         cout << (casasComSuites * 100.0 / totalCasas) << "%" << endl;
@@ -519,6 +530,7 @@ int main(){
                         cout << "Nenhuma casa cadastrada." << endl;
 
                     cout << "----------------------------------------" << endl;
+                    // Exibe porcentagem de salas comerciais com piso ceramica e sala
                     cout << "Porcentagem de salas comerciais com \npiso de ceramica e sala: ";
                     if (totalSalasComerciais > 0)
                         cout << (salasComCeramica * 100.0 / totalSalasComerciais) << "%" << endl;
