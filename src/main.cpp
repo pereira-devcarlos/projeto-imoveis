@@ -71,8 +71,51 @@ void exibirMenu(int& opcao) {
 }
 
 void incluirImovel(Imovel& imovel) {
-    cout << "Digite o tipo do imovel: ";            cin >> imovel.tipo;
-    cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
+    int op;
+    // Menu tipo do imovel
+    do { // Do While para validar a opcao digitada
+        cout << "Escolha o tipo do imovel:" << endl;
+        cout << "[1] - Casa" << endl;
+        cout << "[2] - Apartamento" << endl;
+        cout << "[3] - Terreno" << endl;
+        cout << "[4] - Sala comercial" << endl;
+        cout << "[5] - Galpao" << endl;
+        cout << "Digite a opcao: ";
+        cin >> op;
+        if(op < 1 || op > 5) {
+            cout << "Opcao invalida! Tente novamente." << endl;
+        }
+    } while(op < 1 || op > 5);
+    // Switch case para imovel receber o tipo escolhido
+    switch(op) {
+        case 1: imovel.tipo = "casa"; break;
+        case 2: imovel.tipo = "apartamento"; break;
+        case 3: imovel.tipo = "terreno"; break;
+        case 4: imovel.tipo = "sala_comercial"; break;
+        case 5: imovel.tipo = "galpao"; break;
+    }
+
+    // Menu finalidade do imovel
+    op = 0;
+    do { // Do While para validar a opcao digitada
+        cout << "Escolha a finalidade do imovel:" << endl;
+        cout << "[1] - Venda" << endl;
+        cout << "[2] - Aluguel" << endl;
+        cout << "[3] - Locacao" << endl;
+        cout << "[4] - Temporada" << endl;
+        cout << "Digite a opcao: ";
+        cin >> op;
+        if(op < 1 || op > 4) {
+            cout << "Opcao invalida! Tente novamente." << endl;
+        }
+    } while(op < 1 || op > 4);
+    // Switch case para imovel receber a finalidade escolhida
+    switch(op) {
+        case 1: imovel.finalidade = "venda"; break;
+        case 2: imovel.finalidade = "aluguel"; break;
+        case 3: imovel.finalidade = "locacao"; break;
+        case 4: imovel.finalidade = "temporada"; break;
+    }
 
     cout << "Digite o endereco do imovel: ";
     cin.ignore();
@@ -98,29 +141,28 @@ void incluirImovel(Imovel& imovel) {
     cout << "Digite o numero de banheiros: ";       cin >> imovel.banheiros;
     cout << "Digite o numero de vagas: ";           cin >> imovel.vagas;
 
-    int op;
-    // Cozinha
+    // Quiz Cozinha
     do {
         cout << "Possui cozinha? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.cozinha = (op == 1) ? "sim" : "nao";
 
-    // Sala
+    // Quiz Sala
     do {
         cout << "Possui sala? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.sala = (op == 1) ? "sim" : "nao";
 
-    // Varanda
+    // Quiz Varanda
     do {
         cout << "Possui varanda? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.varanda = (op == 1) ? "sim" : "nao";
 
-    // Area de servico
+    // Quiz Area de servico
     do {
         cout << "Possui area de servico? [1] - Sim  [2] - Nao: ";
         cin >> op;
@@ -128,30 +170,31 @@ void incluirImovel(Imovel& imovel) {
     imovel.areaServico = (op == 1) ? "sim" : "nao";
 
     cout << "Digite o tipo de piso: ";      cin >> imovel.piso;
+
     cout << "Digite a conservacao do imovel: "; cin >> imovel.conservacao;
 
-    // Armarios
+    // Quiz Armarios
     do {
         cout << "Possui armarios? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.armarios = (op == 1) ? "sim" : "nao";
 
-    // Ar condicionado
+    // Quiz Ar condicionado
     do {
         cout << "Possui ar condicionado? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.arCondicionado = (op == 1) ? "sim" : "nao";
 
-    // Aquecedor
+    // Quiz Aquecedor
     do {
         cout << "Possui aquecedor? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.aquecedor = (op == 1) ? "sim" : "nao";
 
-    // Ventilador
+    // Quiz Ventilador
     do {
         cout << "Possui ventilador? [1] - Sim  [2] - Nao: ";
         cin >> op;
