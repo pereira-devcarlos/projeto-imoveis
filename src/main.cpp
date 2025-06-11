@@ -147,7 +147,22 @@ void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
     saida.close();
 }
 
-void exibirImovel(const Imovel& imovel, int indice) {
+void exibirImovel(Imovel& imovel, int indice) {
+    // Troca underline por espaco no endereco, bairro e cidade
+    for (size_t i = 0; i < imovel.endereco.size(); i++) { // Uso do tipo size_t para o método .size()
+        if (imovel.endereco[i] == '_')
+            imovel.endereco[i] = ' ';
+    }
+    for (size_t i = 0; i < imovel.bairro.size(); i++) {
+        if (imovel.bairro[i] == '_')
+            imovel.bairro[i] = ' ';
+    }
+    for (size_t i = 0; i < imovel.cidade.size(); i++) {
+        if (imovel.cidade[i] == '_')
+            imovel.cidade[i] = ' ';
+    }    
+
+    // Exivir os imoveis com os texto formatados
     cout << "Imovel " << indice + 1 << ":" << endl;
     cout << "Tipo: " << imovel.tipo << endl;
     cout << "Finalidade: " << imovel.finalidade << endl;
