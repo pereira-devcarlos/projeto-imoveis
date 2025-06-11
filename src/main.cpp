@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------
+- Projeto Imóveis
+- Sistema de cadastro, consulta, exclusão e geração de relatórios de imóveis.
+- Permite gerenciar imóveis residenciais e comerciais, armazenando os dados em
+  arquivo texto. O usuário pode cadastrar, buscar, excluir, listar e gerar
+  estatísticas dos imóveis via menu interativo no terminal.
+  -----------------------------------------------------------------------------
+*/
+
 #include <iostream>   
 #include <fstream>    // Permite ler e gravar arquivos (ifstream, ofstream)
 #include <string>     // Permite usar o tipo string e suas operacoes
