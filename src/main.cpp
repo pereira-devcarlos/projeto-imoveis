@@ -255,7 +255,7 @@ void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
 }
 
 void exibirImovel(const Imovel& imovel, int indice) {
-    // Cria cópias locais para exibir sem alterar o original
+    // Cria copias locais para exibir sem alterar o original
     string endereco = imovel.endereco;
     string bairro = imovel.bairro;
     string cidade = imovel.cidade;
