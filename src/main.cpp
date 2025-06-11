@@ -308,17 +308,16 @@ int main(){
 
     Imovel imoveis[MAX];
 
+    i = 0;
+    while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
+        lerImovel(imoveis[i], info);
+        quantidade++;
+        i++;
+    }
+    info.close();
+
     opcao = 1;
     while (opcao != 0){
-        // Ler os imoveis do arquivo ate encontrar imoveis.tipo == "fim" ou atingir o limite de MAX
-        i = 0;
-        while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
-            lerImovel(imoveis[i], info);
-            quantidade++;
-            i++;
-        }
-        info.close();
-
         exibirMenu(opcao); // Exibe o menu principal e recebe a opcao do usuario
 
         switch (opcao) {
