@@ -293,7 +293,31 @@ int main(){
                 }
                 break;
             case 4:
-                // Buscar por caracteristicas
+                // Busca de imóveis pelas características: armários, ar-condicionado, aquecedor e ventilador
+                do{
+                    if(opcao < 1 || opcao > 4){
+                        cout << "Opcao invalida!!\n" << endl;
+                    }
+                    cout << "Busca de imoveis por caracteristicas:" << endl;
+                    cout << "[1]-Armarios\t\t[3]-Aquecedor" << endl;
+                    cout << "[2]-Ar Condicionado\t[4]-Ventilador" << endl;
+                    cout << "Digite qual opcao voce deseja: ";
+                    cin >> opcao;
+                    cout << endl;
+                } while (opcao < 1 || opcao > 4);
+                cout << "Com essas caracteristicas foram encontrados:" << endl;
+                for (j = 0, i = 0; i < quantidade; i++) {
+                    if ((opcao == 1 && imoveis[i].armarios == "sim") ||
+                        (opcao == 2 && imoveis[i].arCondicionado == "sim") ||
+                        (opcao == 3 && imoveis[i].aquecedor == "sim") ||
+                        (opcao == 4 && imoveis[i].ventilador == "sim")) {
+                        exibirImovel(imoveis[i], i);
+                        j++;
+                    }
+                }
+                if (j == 0){
+                    cout << "Nenhum imovel encontrado com essa caracteristica." << endl;
+                }
                 break;
             case 5:
                 // Buscar por quartos e suites
