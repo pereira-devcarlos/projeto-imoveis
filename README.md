@@ -30,7 +30,7 @@ Este projeto consiste em um sistema de gerenciamento de imóveis para venda e lo
 O sistema lê e grava informações de imóveis em um arquivo-texto, permitindo diversas operações de consulta, inserção e exclusão.
 
 - **Arquivo:** `BD_Imoveis2.txt`
-- **Limite:** 100 imóveis
+- **Limite:** 200 imóveis
 - **Campos:** 22 atributos por imóvel (tipo, finalidade, endereço, bairro, cidade, área, valor, IPTU, quartos, suítes, banheiros, vagas, cozinha, sala, varanda, área de serviço, piso, conservação, armários, ar-condicionado, aquecedor, ventilador)
 - **Observações:**  
   - Primeira linha do arquivo é descartada  
