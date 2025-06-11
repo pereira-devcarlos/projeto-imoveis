@@ -82,6 +82,7 @@ void incluirImovel(Imovel& imovel) {
         cout << "[5] - Galpao" << endl;
         cout << "Digite a opcao: ";
         cin >> op;
+        cout << endl;
         if(op < 1 || op > 5) {
             cout << "Opcao invalida! Tente novamente." << endl;
         }
@@ -105,6 +106,7 @@ void incluirImovel(Imovel& imovel) {
         cout << "[4] - Temporada" << endl;
         cout << "Digite a opcao: ";
         cin >> op;
+        cout << endl;
         if(op < 1 || op > 4) {
             cout << "Opcao invalida! Tente novamente." << endl;
         }
@@ -169,9 +171,28 @@ void incluirImovel(Imovel& imovel) {
     } while (op != 1 && op != 2);
     imovel.areaServico = (op == 1) ? "sim" : "nao";
 
-    cout << "Digite o tipo de piso: ";      cin >> imovel.piso;
+    cout << "Digite o tipo de piso: ";      
+    cin >> imovel.piso;
 
-    cout << "Digite a conservacao do imovel: "; cin >> imovel.conservacao;
+    // Menu para conservacao
+    op = 0;
+    do {
+        cout << "Qual a conservacao do imovel?" << endl;
+        cout << "[1] - Novo" << endl;
+        cout << "[2] - Usado" << endl;
+        cout << "[3] - Reformado" << endl;
+        cout << "Digite a opcao: ";
+        cin >> op;
+        if(op < 1 || op > 3) {
+            cout << "Opcao invalida! Tente novamente." << endl;
+        }
+    } while(op < 1 || op > 3);
+
+    switch(op) {
+        case 1: imovel.conservacao = "novo"; break;
+        case 2: imovel.conservacao = "usado"; break;
+        case 3: imovel.conservacao = "reformado"; break;
+    }
 
     // Quiz Armarios
     do {
@@ -318,7 +339,7 @@ int main(){
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
-                    cout << "Resultado da busca por " << userEnd << ":" << endl;                 
+                    cout << "Resultado da busca por " << userEnd << ":\n" << endl;                 
                     // Troca espacos por underline para padronizar igual ao arquivo
                     for (int k = 0; k < 30; k++) {
                         if (userEnd[k] == ' ')
@@ -343,7 +364,7 @@ int main(){
                         for (i = 0; i < quantidade; i++) {
                             // Se encontrar o endereco igual ao digitado pelo usuario
                             if (nomeRua == imoveis[i].endereco) {
-                                // Remove o imovel deslocando os proximos para cima no array
+                                // Remove o imovel deslocando os proximos para esquerda no array
                                 for (int j = i; j < quantidade - 1; j++) {
                                     imoveis[j] = imoveis[j+1];
                                 }
