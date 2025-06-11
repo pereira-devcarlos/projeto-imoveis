@@ -98,7 +98,7 @@ Casa Venda Rua_Azul Centro CidadeX 120 350000 800 3 1 2 2 1 1 1 1 Cerâmica Nova
 fim
 ```
 - **Separador:** Espaço
-- **Máximo:** 100 linhas (excluindo cabeçalho e linha “fim”)
+- **Máximo:** 200 linhas (excluindo cabeçalho e linha “fim”)
 
 ---
 
