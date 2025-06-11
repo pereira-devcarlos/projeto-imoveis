@@ -72,7 +72,14 @@ void exibirMenu(int& opcao) {
 void incluirImovel(Imovel& imovel) {
     cout << "Digite o tipo do imovel: ";            cin >> imovel.tipo;
     cout << "Digite a finalidade do imovel: ";      cin >> imovel.finalidade;
+    
     cout << "Digite o endereco do imovel: ";        cin >> imovel.endereco;
+    // Troca espacos por underline no endereco
+    for (int i = 0; i < imovel.endereco.size(); i++) {
+        if (imovel.endereco[i] == ' ')
+            imovel.endereco[i] = '_';
+    }
+
     cout << "Digite o bairro do imovel: ";          cin >> imovel.bairro;
     cout << "Digite a cidade do imovel: ";          cin >> imovel.cidade;
     cout << "Digite a area do imovel (em m2): ";    cin >> imovel.area;
@@ -201,7 +208,7 @@ int main(){
                             userEnd[k] = '_';
                     }
 
-                    string nomeRua(userEnd);
+                    string nomeRua(userEnd); // Transformando char em string para facilitar a comparação
 
                     int removido = 0;
                     // Percorre todos os imoveis cadastrados
