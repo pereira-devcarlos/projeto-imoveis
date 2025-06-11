@@ -267,7 +267,7 @@ int main(){
                     cin >> userFaixa[1];
                     cout << endl;
 
-                    cout << "No intervalo de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
+                    cout << "Na faixa de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
                     for (i = 0, j = 0; i < quantidade; i++){
                         if((imoveis[i].finalidade == "locacao" || imoveis[i].finalidade == "aluguel" || imoveis[i].finalidade == "temporada") && (imoveis[i].valor > userFaixa[0] && imoveis[i].valor < userFaixa[1])){
                             exibirImovel(imoveis[i], i);
