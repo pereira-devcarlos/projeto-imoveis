@@ -309,7 +309,7 @@ int main(){
                 break;
             case 0:
                 // Sair e agradecer o usuario
-                cout << "Obrigado por utilizar o sistema de gerenciamento de imoveis!" << endl;
+                cout << "Programa encerrado. Volte sempre!" << endl;
                 break;
             default:
                 cout << "\nOpcao invalida. Tente novamente." << endl;
