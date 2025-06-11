@@ -13,7 +13,7 @@ struct Imovel{
     string bairro;
     string cidade;
     int area;
-    string valor; // Troque de int para string
+    string valor; 
     string iptu;
     int quartos;
     int suites;
@@ -37,7 +37,7 @@ void lerImovel(Imovel& imovel, ifstream& info) {
     info >> imovel.bairro;
     info >> imovel.cidade;
     info >> imovel.area;
-    info >> imovel.valor; // Agora lê como string
+    info >> imovel.valor; 
     info >> imovel.iptu;
     info >> imovel.quartos;
     info >> imovel.suites;
@@ -307,26 +307,26 @@ int main(){
 
     Imovel imoveis[MAX];
 
-    // L� todos os im�veis do arquivo para o vetor em mem�ria
+    // Le todos os imoveis do arquivo para o vetor em memoria
     i = 0;
     while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
         lerImovel(imoveis[i], info);
         quantidade++;
         i++;
     }
-    info.close(); // Fecha o arquivo ap�s a leitura inicial
+    info.close(); // Fecha o arquivo apos a leitura inicial
 
     opcao = 1;
     while (opcao != 0){
-        exibirMenu(opcao); // Exibe o menu principal e recebe a op��o do usu�rio
+        exibirMenu(opcao); // Exibe o menu principal e recebe a opcao do usuario
 
         switch (opcao) {
             case 1:
-                // Inclui novo im�vel no vetor e salva no arquivo
+                // Inclui novo imovel no vetor e salva no arquivo
                 if (quantidade < MAX) {
                     incluirImovel(imoveis[quantidade]);
                     quantidade++;
-                    salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo ap�s inclus�o
+                    salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo apos inclusao
                     cout << "\nImovel incluido com sucesso!" << endl;
                 } else {
                     cout << "\nLimite de imoveis atingido. Nao e possivel incluir mais." << endl;
@@ -334,21 +334,21 @@ int main(){
                 break;
             case 2:
                 {
-                    // Busca e exclus�o de im�vel pela rua
+                    // Busca e exclusao de imovel pela rua
                     char userEnd[30] = {0};
                     cout << "\nBuscar e excluir imovel pela rua\nDigite o nome da rua: ";
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
                     cout << "Resultado da busca por " << userEnd << ":\n" << endl;                 
-                    // Troca espa�os por underline para padronizar igual ao arquivo
+                    // Troca espacos por underline para padronizar igual ao arquivo
                     for (int k = 0; k < 30; k++) {
                         if (userEnd[k] == ' ')
                             userEnd[k] = '_';
                     }
-                    string nomeRua(userEnd); // Converte para string para facilitar compara��o
+                    string nomeRua(userEnd); // Converte para string para facilitar comparacao
 
-                    // Exibe todos os im�veis encontrados com o endere�o informado
+                    // Exibe todos os imoveis encontrados com o endereco informado
                     j=0;
                     for (i = 0; i < quantidade; i++){
                         if(nomeRua == imoveis[i].endereco){
@@ -360,19 +360,19 @@ int main(){
                         cout << "Nao possui nenhum imovel com esse endereco!" << endl;
                     }
                     else {
-                        // Pergunta se deseja excluir o im�vel encontrado
+                        // Pergunta se deseja excluir o imovel encontrado
                         do{
                             if(opcao < 1 || opcao > 2){
-                                cout << "Op�ao inv�lida!!" << endl;
+                                cout << "Opcao invalida!!" << endl;
                             }
-                            cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]N�o: ";
+                            cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]Nao: ";
                             cin >> opcao;
                         } while (opcao < 1 || opcao > 2);
                         if(opcao == 1){
-                            // Remove todos os im�veis com o endere�o informado
+                            // Remove todos os imoveis com o endereco informado
                             for (i = 0; i < quantidade; i++) {
                                 if (nomeRua == imoveis[i].endereco) {
-                                    // Remove o im�vel deslocando os pr�ximos para esquerda no array
+                                    // Remove o imovel deslocando os proximos para esquerda no array
                                     for (j = i; j < quantidade - 1; j++) {
                                         imoveis[j] = imoveis[j+1];
                                     }
@@ -380,7 +380,7 @@ int main(){
                                     i--;
                                 }
                             }
-                            salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo ap�s exclus�o
+                            salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo apos exclusao
                             cout << "\nImovel removido com sucesso!" << endl;
                         }
                     }
@@ -388,7 +388,7 @@ int main(){
                 break;
             case 3:
                 {
-                    // Busca de imóveis por faixa de valor para locação, aluguel ou temporada
+                    // Busca de imoveis por faixa de valor para locacao, aluguel ou temporada
                     int userFaixa[2];
                     cout << "Buscar imovel por faixa de valor para locacao, aluguel  ou  temporada:\nDigite o 1 valor: ";
                     cin >> userFaixa[0];
@@ -398,15 +398,15 @@ int main(){
 
                     cout << "Na faixa de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:\n" << endl;
                     for (i = 0, j = 0; i < quantidade; i++){
-                        // Busca apenas imóveis com finalidade locacao, aluguel ou temporada
+                        // Busca apenas imoveis com finalidade locacao, aluguel ou temporada
                         if((imoveis[i].finalidade == "locacao" ||
                             imoveis[i].finalidade == "aluguel" ||
                             imoveis[i].finalidade == "temporada")) {
 
-                            // Extrai apenas o valor numérico do campo valor
+                            // Extrai apenas o valor numerico do campo valor
                             int valorNumerico = 0;
                             stringstream ss(imoveis[i].valor);
-                            ss >> valorNumerico; // Vai pegar só o número do início da string
+                            ss >> valorNumerico; // Vai pegar so o numero do inicio da string
 
                             if(valorNumerico > userFaixa[0] && valorNumerico < userFaixa[1]){
                                 exibirImovel(imoveis[i], i);
@@ -420,7 +420,7 @@ int main(){
                 }
                 break;
             case 4:
-                // Busca de im�veis pelas caracter�sticas: arm�rios, ar-condicionado, aquecedor e ventilador
+                // Busca de imoveis pelas caracteristicas: armarios, ar-condicionado, aquecedor e ventilador
                 do{
                     if(opcao < 1 || opcao > 4){
                         cout << "Opcao invalida!!\n" << endl;
@@ -433,7 +433,7 @@ int main(){
                     cout << endl;
                 } while (opcao < 1 || opcao > 4);
                 cout << "Com essas caracteristicas foram encontrados:" << endl;
-                // Exibe todos os im�veis que possuem a caracter�stica escolhida
+                // Exibe todos os imoveis que possuem a caracteristica escolhida
                 for (j = 0, i = 0; i < quantidade; i++) {
                     if ((opcao == 1 && imoveis[i].armarios == "sim") ||
                         (opcao == 2 && imoveis[i].arCondicionado == "sim") ||
@@ -448,8 +448,8 @@ int main(){
                 }
                 break;
             case 5:
-                // Busca de im�veis pelo n�mero de quartos e su�tes
-                int userQuartos, userSuites; // Define variaveis para armazenar os valores digitados pelo usu�rio
+                // Busca de imoveis pelo numero de quartos e suites
+                int userQuartos, userSuites; // Define variaveis para armazenar os valores digitados pelo usuario
                 cout << "Buscar imovel por numero de quartos e suites:\nDigite o numero de quartos: ";
                 cin >> userQuartos;
                 cout << "Digite o numero de suites: ";
@@ -469,7 +469,7 @@ int main(){
                 }
                 break;
             case 6:
-                // relatório de estatísticas: porcentagens de imóveis por finalidade, porcentagens de casas com suítes, porcentagem de pisos com cerâmica nas salas comerciais;
+                // relatorio de estatisticas: porcentagens de imoveis por finalidade, porcentagens de casas com suites, porcentagem de pisos com ceramica nas salas comerciais;
                 {
                     int venda = 0, aluguel = 0, locacao = 0, temporada = 0;
                     int casasComSuites = 0, totalCasas = 0;
@@ -490,7 +490,7 @@ int main(){
                         }
                     }
 
-                    cout << fixed << setprecision(2); // <-- Adicione esta linha
+                    cout << fixed << setprecision(2);
 
                     cout << "\nRelatorio Estatistico:\n" << endl;
                     cout << "Porcentagem de imoveis por finalidade:" << endl;
@@ -521,18 +521,18 @@ int main(){
                 cout << "\nRelatorio estatistico concluido." << endl;
                 break;
             case 7:
-                // Lista todos os im�veis cadastrados
+                // Lista todos os imoveis cadastrados
                 cout << "Todos os imoveis cadastrados no sistema estao abaixo:\n" << endl;
                 for (i = 0; i < quantidade; i++){
                     exibirImovel(imoveis[i], i);
                 }
                 break;
             case 0:
-                // Sair e agradecer o usu�rio
+                // Sair e agradecer o usuario
                 cout << "Programa encerrado. Volte sempre!" << endl;
                 break;
             default:
-                // Caso o usu�rio digite uma op��o inv�lida
+                // Caso o usuario digite uma opcao invalida
                 cout << "\nOpcao invalida. Tente novamente." << endl;
                 break;
         }
