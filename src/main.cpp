@@ -261,7 +261,7 @@ int main(){
             case 3:
                 {
                     int userFaixa[2];
-                    cout << "Buscar imovel por faixa de valor:\nDigite o 1 valor: ";
+                    cout << "Buscar imovel por faixa de valor para locacao, aluguel  ou  temporada:\nDigite o 1 valor: ";
                     cin >> userFaixa[0];
                     cout << "Digite o 2 valor: ";
                     cin >> userFaixa[1];
@@ -269,7 +269,7 @@ int main(){
 
                     cout << "No intervalo de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
                     for (i = 0, j = 0; i < quantidade; i++){
-                        if(imoveis[i].valor > userFaixa[0] && imoveis[i].valor < userFaixa[1]){
+                        if((imoveis[i].finalidade == "locacao" || imoveis[i].finalidade == "aluguel" || imoveis[i].finalidade == "temporada") && (imoveis[i].valor > userFaixa[0] && imoveis[i].valor < userFaixa[1])){
                             exibirImovel(imoveis[i], i);
                             j++;
                         }
