@@ -300,6 +300,7 @@ int main(){
     int quantidade = 0;
     int i, j, opcao;
 
+    // ifstream para coletar os dados de arquivo txt externo
     ifstream info("../../data/BD_Imoveis2.txt");
     if(!info.is_open()){
         cout << "Erro ao abrir o arquivo" << endl;
@@ -308,25 +309,26 @@ int main(){
 
     Imovel imoveis[MAX];
 
+    // Lê todos os imóveis do arquivo para o vetor em memória
     i = 0;
     while (i < MAX && info >> imoveis[i].tipo && imoveis[i].tipo != "fim") {
         lerImovel(imoveis[i], info);
         quantidade++;
         i++;
     }
-    info.close();
+    info.close(); // Fecha o arquivo após a leitura inicial
 
     opcao = 1;
     while (opcao != 0){
-        exibirMenu(opcao); // Exibe o menu principal e recebe a opcao do usuario
+        exibirMenu(opcao); // Exibe o menu principal e recebe a opção do usuário
 
         switch (opcao) {
             case 1:
-                // Incluir novo imovel
+                // Inclui novo imóvel no vetor e salva no arquivo
                 if (quantidade < MAX) {
                     incluirImovel(imoveis[quantidade]);
                     quantidade++;
-                    salvarImoveisNoArquivo(imoveis, quantidade);
+                    salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo após inclusão
                     cout << "\nImovel incluido com sucesso!" << endl;
                 } else {
                     cout << "\nLimite de imoveis atingido. Nao e possivel incluir mais." << endl;
@@ -334,27 +336,27 @@ int main(){
                 break;
             case 2:
                 {
-                    // Buscar e excluir imovel pela rua
+                    // Busca e exclusão de imóvel pela rua
                     char userEnd[30] = {0};
                     cout << "\nBuscar e excluir imovel pela rua\nDigite o nome da rua: ";
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
                     cout << "Resultado da busca por " << userEnd << ":\n" << endl;                 
-                    // Troca espacos por underline para padronizar igual ao arquivo
+                    // Troca espaços por underline para padronizar igual ao arquivo
                     for (int k = 0; k < 30; k++) {
                         if (userEnd[k] == ' ')
                             userEnd[k] = '_';
                     }
-                    string nomeRua(userEnd); // Transformando char em string para facilitar a comparação
+                    string nomeRua(userEnd); // Converte para string para facilitar comparação
 
-                    // Exibe todos os imoveis encontrados com o endereco informado
+                    // Exibe todos os imóveis encontrados com o endereço informado
                     for (i = 0; i < quantidade; i++){
                         if(nomeRua == imoveis[i].endereco){
                             exibirImovel(imoveis[i], i);
                         }
                     }
-                    // Pergunta se deseja excluir o imovel encontrado
+                    // Pergunta se deseja excluir o imóvel encontrado
                     do{
                         if(opcao < 1 || opcao > 2){
                             cout << "Opçao inválida!!" << endl;
@@ -363,10 +365,10 @@ int main(){
                         cin >> opcao;
                     } while (opcao < 1 || opcao > 2);
                     if(opcao == 1){
-                        // Remove todos os imoveis com o endereco informado
+                        // Remove todos os imóveis com o endereço informado
                         for (i = 0; i < quantidade; i++) {
                             if (nomeRua == imoveis[i].endereco) {
-                                // Remove o imovel deslocando os proximos para esquerda no array
+                                // Remove o imóvel deslocando os próximos para esquerda no array
                                 for (int j = i; j < quantidade - 1; j++) {
                                     imoveis[j] = imoveis[j+1];
                                 }
@@ -374,14 +376,14 @@ int main(){
                                 i--;
                             }
                         }
-                        salvarImoveisNoArquivo(imoveis, quantidade);
+                        salvarImoveisNoArquivo(imoveis, quantidade); // Atualiza o arquivo após exclusão
                         cout << "\nImovel removido com sucesso!" << endl;
                     }
                 }
                 break;
             case 3:
                 {
-                    // Busca de imoveis por faixa de valor para locacao, aluguel ou temporada
+                    // Busca de imóveis por faixa de valor para locação, aluguel ou temporada
                     int userFaixa[2];
                     cout << "Buscar imovel por faixa de valor para locacao, aluguel  ou  temporada:\nDigite o 1 valor: ";
                     cin >> userFaixa[0];
@@ -391,6 +393,7 @@ int main(){
 
                     cout << "Na faixa de R$" << userFaixa[0] << " a R$" << userFaixa[1] << " possui:" << endl;
                     for (i = 0, j = 0; i < quantidade; i++){
+                        // Busca apenas imóveis com finalidade locacao, aluguel ou temporada
                         if((imoveis[i].finalidade == "locacao" ||
                             imoveis[i].finalidade == "aluguel" ||
                             imoveis[i].finalidade == "temporada") &&
@@ -419,7 +422,7 @@ int main(){
                     cout << endl;
                 } while (opcao < 1 || opcao > 4);
                 cout << "Com essas caracteristicas foram encontrados:" << endl;
-                // Exibe todos os imoveis que possuem a caracteristica escolhida
+                // Exibe todos os imóveis que possuem a característica escolhida
                 for (j = 0, i = 0; i < quantidade; i++) {
                     if ((opcao == 1 && imoveis[i].armarios == "sim") ||
                         (opcao == 2 && imoveis[i].arCondicionado == "sim") ||
@@ -438,21 +441,21 @@ int main(){
                 // (implementar aqui se desejar)
                 break;
             case 6:
-                // Relatorio estatistico
+                // Relatório estatístico
                 // (implementar aqui se desejar)
                 break;
             case 7:
-                // Listar todos os imoveis cadastrados
+                // Lista todos os imóveis cadastrados
                 for (i = 0; i < quantidade; i++){
                     exibirImovel(imoveis[i], i);
                 }
                 break;
             case 0:
-                // Sair e agradecer o usuario
+                // Sair e agradecer o usuário
                 cout << "Programa encerrado. Volte sempre!" << endl;
                 break;
             default:
-                // Caso o usuario digite uma opcao invalida
+                // Caso o usuário digite uma opção inválida
                 cout << "\nOpcao invalida. Tente novamente." << endl;
                 break;
         }
