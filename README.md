@@ -78,7 +78,9 @@ property-project/
 ├── docs/                   # Documentos, relatórios ou instruções extras
 │   └── ReadMe.txt
 │
+├── .gitattributes
 ├── .gitignore
+├── LICENSE
 └── README.md
 ```
 
