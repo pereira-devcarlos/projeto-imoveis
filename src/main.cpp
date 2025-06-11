@@ -220,13 +220,26 @@ int main(){
                     cin.ignore();
                     cin.getline(userEnd, 30);
 
+                    cout << "Resultado da busca por " << userEnd << ":" << endl;                 
                     // Troca espacos por underline para padronizar igual ao arquivo
                     for (int k = 0; k < 30; k++) {
                         if (userEnd[k] == ' ')
                             userEnd[k] = '_';
                     }
-
                     string nomeRua(userEnd); // Transformando char em string para facilitar a comparação
+
+                    for (i = 0; i < quantidade; i++){
+                        if(nomeRua == imoveis[i].endereco){
+                            exibirImovel(imoveis[i], i);
+                        }
+                    }
+                    do{
+                        if(opcao < 1 || opcao > 2){
+                            cout << "Opçao inválida!!" << endl;
+                        }
+                        cout << "\nDeseja excluir esse imovel?\nDigite [1]Sim ou [2]Não: ";
+                        cin >> opcao;
+                    } while (opcao < 1 || opcao > 2);
 
                     int removido = 0;
                     // Percorre todos os imoveis cadastrados
