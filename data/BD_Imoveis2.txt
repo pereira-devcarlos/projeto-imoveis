@@ -1,3 +1,4 @@
 apartamento aluguel Avenida_Getulio_Vargas Centro Alfenas 75 1200 150 2 0 1 1 sim sim sim sim laminado reformado sim sim nao nao
 galpao venda Distrito_Industrial Distrito_Industrial Alfenas 1500 850000 2500 0 0 2 5 sim sim nao sim cimento usado nao nao nao nao
+casa venda Rua_Jasmins Vila_Promessa Alfenas 80 210000 200 4 1 2 5 sim sim nao sim ceramica novo sim nao sim sim
 fim
