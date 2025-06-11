@@ -6,6 +6,7 @@
 
 using namespace std;
 
+// Estrutura que representa um imovel
 struct Imovel{
     string tipo;
     string finalidade;
@@ -31,6 +32,7 @@ struct Imovel{
     string ventilador;
 };
 
+// Le os dados de um imovel a partir de um arquivo
 void lerImovel(Imovel& imovel, ifstream& info) {
     info >> imovel.finalidade;
     info >> imovel.endereco;
@@ -55,6 +57,7 @@ void lerImovel(Imovel& imovel, ifstream& info) {
     info >> imovel.ventilador;
 }
 
+// Exibe o menu principal e recebe a opcao do usuario
 void exibirMenu(int& opcao) {
     cout << "\n========== MENU DE IMOVEIS ==========" << endl;
     cout << "[1] Incluir novo imovel" << endl;
@@ -71,10 +74,11 @@ void exibirMenu(int& opcao) {
     cout << endl;
 }
 
+// Função para incluir um novo imovel preenchendo todos os campos
 void incluirImovel(Imovel& imovel) {
     int op;
     // Menu tipo do imovel
-    do { // Do While para validar a opcao digitada
+    do {
         cout << "Escolha o tipo do imovel:" << endl;
         cout << "[1] - Casa" << endl;
         cout << "[2] - Apartamento" << endl;
@@ -88,7 +92,7 @@ void incluirImovel(Imovel& imovel) {
             cout << "Opcao invalida! Tente novamente." << endl;
         }
     } while(op < 1 || op > 5);
-    // Switch case para imovel receber o tipo escolhido
+    // Define o tipo do imovel
     switch(op) {
         case 1: imovel.tipo = "casa"; break;
         case 2: imovel.tipo = "apartamento"; break;
@@ -99,7 +103,7 @@ void incluirImovel(Imovel& imovel) {
 
     // Menu finalidade do imovel
     op = 0;
-    do { // Do While para validar a opcao digitada
+    do {
         cout << "Escolha a finalidade do imovel:" << endl;
         cout << "[1] - Venda" << endl;
         cout << "[2] - Aluguel" << endl;
@@ -112,7 +116,7 @@ void incluirImovel(Imovel& imovel) {
             cout << "Opcao invalida! Tente novamente." << endl;
         }
     } while(op < 1 || op > 4);
-    // Switch case para imovel receber a finalidade escolhida
+    // Define a finalidade do imovel
     switch(op) {
         case 1: imovel.finalidade = "venda"; break;
         case 2: imovel.finalidade = "aluguel"; break;
@@ -120,6 +124,7 @@ void incluirImovel(Imovel& imovel) {
         case 4: imovel.finalidade = "temporada"; break;
     }
 
+    // Recebe os dados de endereco, bairro e cidade, trocando espacos por underline
     cout << "Digite o endereco do imovel: ";
     cin.ignore();
     getline(cin, imovel.endereco);
@@ -136,6 +141,7 @@ void incluirImovel(Imovel& imovel) {
     for (size_t i = 0; i < imovel.cidade.size(); i++)
         if (imovel.cidade[i] == ' ') imovel.cidade[i] = '_';
 
+    // Recebe os demais dados do imovel
     cout << "Digite a area do imovel (em m2): ";    cin >> imovel.area;
     cout << "Digite o valor do imovel: ";           cin >> imovel.valor;
     cout << "Digite o IPTU do imovel: ";            cin >> imovel.iptu;
@@ -144,28 +150,28 @@ void incluirImovel(Imovel& imovel) {
     cout << "Digite o numero de banheiros: ";       cin >> imovel.banheiros;
     cout << "Digite o numero de vagas: ";           cin >> imovel.vagas;
 
-    // Quiz Cozinha
+    // Pergunta se possui cozinha
     do {
         cout << "Possui cozinha? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.cozinha = (op == 1) ? "sim" : "nao";
 
-    // Quiz Sala
+    // Pergunta se possui sala
     do {
         cout << "Possui sala? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.sala = (op == 1) ? "sim" : "nao";
 
-    // Quiz Varanda
+    // Pergunta se possui varanda
     do {
         cout << "Possui varanda? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.varanda = (op == 1) ? "sim" : "nao";
 
-    // Quiz Area de servico
+    // Pergunta se possui area de servico
     do {
         cout << "Possui area de servico? [1] - Sim  [2] - Nao: ";
         cin >> op;
@@ -195,28 +201,28 @@ void incluirImovel(Imovel& imovel) {
         case 3: imovel.conservacao = "reformado"; break;
     }
 
-    // Quiz Armarios
+    // Pergunta se possui armarios
     do {
         cout << "Possui armarios? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.armarios = (op == 1) ? "sim" : "nao";
 
-    // Quiz Ar condicionado
+    // Pergunta se possui ar condicionado
     do {
         cout << "Possui ar condicionado? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.arCondicionado = (op == 1) ? "sim" : "nao";
 
-    // Quiz Aquecedor
+    // Pergunta se possui aquecedor
     do {
         cout << "Possui aquecedor? [1] - Sim  [2] - Nao: ";
         cin >> op;
     } while (op != 1 && op != 2);
     imovel.aquecedor = (op == 1) ? "sim" : "nao";
 
-    // Quiz Ventilador
+    // Pergunta se possui ventilador
     do {
         cout << "Possui ventilador? [1] - Sim  [2] - Nao: ";
         cin >> op;
@@ -224,6 +230,7 @@ void incluirImovel(Imovel& imovel) {
     imovel.ventilador = (op == 1) ? "sim" : "nao";
 }
 
+// Salva todos os imoveis do vetor no arquivo
 void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
     ofstream saida("../data/BD_Imoveis2.txt");
     for (int i = 0; i < quantidade; i++) {
@@ -254,12 +261,14 @@ void salvarImoveisNoArquivo(Imovel imoveis[], int quantidade) {
     saida.close();
 }
 
+// Exibe os dados de um imovel formatados para o usuario
 void exibirImovel(const Imovel& imovel, int indice) {
     // Cria copias locais para exibir sem alterar o original
     string endereco = imovel.endereco;
     string bairro = imovel.bairro;
     string cidade = imovel.cidade;
 
+    // Troca underline por espaco para exibir
     for (size_t i = 0; i < endereco.size(); i++)
         if (endereco[i] == '_') endereco[i] = ' ';
     for (size_t i = 0; i < bairro.size(); i++)
@@ -294,11 +303,11 @@ void exibirImovel(const Imovel& imovel, int indice) {
 }
 
 int main(){
-    const int MAX = 200;
+    const int MAX = 200; // Limite maximo de imoveis
     int quantidade = 0;
     int i, j, opcao;
 
-    // ifstream para coletar os dados de arquivo txt externo
+    // Abre o arquivo de dados dos imoveis
     ifstream info("../data/BD_Imoveis2.txt");
     if(!info.is_open()){
         cout << "Erro ao abrir o arquivo" << endl;
@@ -449,7 +458,7 @@ int main(){
                 break;
             case 5:
                 // Busca de imoveis pelo numero de quartos e suites
-                int userQuartos, userSuites; // Define variaveis para armazenar os valores digitados pelo usuario
+                int userQuartos, userSuites;
                 cout << "Buscar imovel por numero de quartos e suites:\nDigite o numero de quartos: ";
                 cin >> userQuartos;
                 cout << "Digite o numero de suites: ";
@@ -463,13 +472,12 @@ int main(){
                         j++;
                     }
                 }
-                // Se nenhum imovel for encontrado, exibe mensagem de aviso
                 if (j == 0) {
                     cout << "Nenhum imovel encontrado com essa quantidade de quartos e suites." << endl;
                 }
                 break;
             case 6:
-                // relatorio de estatisticas: porcentagens de imoveis por finalidade, porcentagens de casas com suites, porcentagem de pisos com ceramica nas salas comerciais;
+                // Relatorio estatistico sobre os imoveis cadastrados
                 {
                     int venda = 0, aluguel = 0, locacao = 0, temporada = 0;
                     int casasComSuites = 0, totalCasas = 0;
