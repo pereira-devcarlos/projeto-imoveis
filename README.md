@@ -68,15 +68,15 @@ O sistema lê e grava informações de imóveis em um arquivo-texto, permitindo 
 ```
 property-project/
 │
-├── src/                    # Códigos-fonte (.cpp, .h)
-│   ├── main.cpp
-│   └── imovel.h
-│
 ├── data/                   # Arquivos de dados utilizados pelo programa
 │   └── BD_Imoveis2.txt
 │
 ├── docs/                   # Documentos, relatórios ou instruções extras
 │   └── ReadMe.txt
+│
+├── src/                    # Códigos-fonte (.cpp, .h)
+│   ├── main.cpp
+│   └── imovel.h
 │
 ├── .gitattributes
 ├── .gitignore
