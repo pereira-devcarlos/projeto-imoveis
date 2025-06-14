@@ -94,7 +94,8 @@ property-project/
 ## 🗃️ Estrutura do Arquivo
 
 ```
-tipo finalidade endereço bairro cidade área valor IPTU quartos suítes banheiros vagas cozinha sala varanda área_serviço piso conservação armários ar-condicionado aquecedor ventilador
+tipo finalidade endereço bairro cidade área valor IPTU quartos suítes banheiros vagas cozinha sala varanda área_serviço piso
+conservação armários ar-condicionado aquecedor ventilador
 Casa Venda Rua_Azul Centro CidadeX 120 350000 800 3 1 2 2 1 1 1 1 Cerâmica Nova Sim Não Não Sim
 ...
 fim
